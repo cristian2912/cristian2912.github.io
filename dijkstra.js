@@ -1,4 +1,4 @@
-// app.js
+// js/dijkstra.js
 function dijkstra(graph, start) {
     const distances = {};
     const visited = new Set();
@@ -32,3 +32,6 @@ function dijkstra(graph, start) {
 
     return distances;
 }
+
+// Exportar la función para usarla en app.js
+export { dijkstra };
