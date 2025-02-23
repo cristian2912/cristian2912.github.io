@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torre de Hanoi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .tower {
+            display: inline-block;
+            width: 100px;
+            height: 300px;
+            background-color: #8B4513; /* Color café madera */
+            margin: 0 50px; /* Más separación entre torres */
+            position: relative;
+        }
+
+        .disk {
+            height: 30px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            bottom: 0;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Torre de Hanoi</h1>
+    <div style="display: flex; justify-content: center; align-items: flex-end; height: 300px;">
+        <div id="tower1" class="tower" onclick="moveDisk(1)"></div>
+        <div id="tower2" class="tower" onclick="moveDisk(2)"></div>
+        <div id="tower3" class="tower" onclick="moveDisk(3)"></div>
+    </div>
+    <div id="message">Haz clic en un disco para moverlo.</div>
+
+    <script>
+        let towers = [
+            [5, 4, 3, 2, 1],  // Torre 1 (5 discos)
+            [],               // Torre 2
+            []                // Torre 3
+        ];
+
+        let selectedDisk = null;
+
+        // Colores para los discos
+        const diskColors = ["#FF5733", "#33FF57", "#3357FF", "#F1C40F", "#8E44AD"];
+
+        // Función para crear los discos visualmente
+        function createDisks() {
+            // Limpiar las torres visualmente
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('tower' + i).innerHTML = '';
+            }
+
+            // Crear discos en la torre 1
+            for (let i = 0; i < towers[0].length; i++) {
+                let disk = document.createElement('div');
+                disk.classList.add('disk');
+                disk.style.width = (towers[0][i] * 30) + 'px';  // Tamaño de disco proporcional
+                disk.style.bottom = (i * 35) + 'px';  // Espaciado entre discos
+                disk.style.backgroundColor = diskColors[i];  // Color del disco
+                disk.dataset.disk = towers[0][i];  // Almacenar el número de disco
+                document.getElementById('tower1').appendChild(disk);
+            }
+
+            // Crear discos en la torre 2
+            for (let i = 0; i < towers[1].length; i++) {
+                let disk = document.createElement('div');
+                disk.classList.add('disk');
+                disk.style.width = (towers[1][i] * 30) + 'px';
+                disk.style.bottom = (i * 35) + 'px';
+                disk.style.backgroundColor = diskColors[i];  // Color del disco
+                disk.dataset.disk = towers[1][i];
+                document.getElementById('tower2').appendChild(disk);
+            }
+
+            // Crear discos en la torre 3
+            for (let i = 0; i < towers[2].length; i++) {
+                let disk = document.createElement('div');
+                disk.classList.add('disk');
+                disk.style.width = (towers[2][i] * 30) + 'px';
+                disk.style.bottom = (i * 35) + 'px';
+                disk.style.backgroundColor = diskColors[i];  // Color del disco
+                disk.dataset.disk = towers[2][i];
+                document.getElementById('tower3').appendChild(disk);
+            }
+        }
+
+        // Función para mover los discos entre torres
+        function moveDisk(towerIndex) {
+            if (selectedDisk === null) {
+                // Verificar si la torre tiene discos
+                let tower = towers[towerIndex - 1];
+                if (tower.length > 0) {
+                    // Seleccionar el disco superior de la torre
+                    selectedDisk = tower.pop();
+                    createDisks();  // Actualizar las torres visualmente
+                }
+            } else {
+                // Intentar mover el disco seleccionado a la torre indicada
+                let tower = towers[towerIndex - 1];
+                if (tower.length === 0 || tower[tower.length - 1] > selectedDisk) {
+                    tower.push(selectedDisk);
+                    selectedDisk = null;
+                    createDisks();  // Actualizar las torres visualmente
+                    checkWin();     // Verificar si se ha ganado
+                }
+            }
+        }
+
+        // Función para verificar si se ha ganado el juego
+        function checkWin() {
+            if (towers[2].length === 5 && towers[2][0] === 1 && towers[2][1] === 2 && towers[2][2] === 3 &&
+                towers[2][3] === 4 && towers[2][4] === 5) {
+                document.getElementById('message').innerText = '¡Ganaste!';
+            }
+        }
+
+        // Inicializar el juego
+        createDisks();
+    </script>
+
+</body>
+</html>
