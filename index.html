@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Optimizador de Conexiones</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Tus estilos CSS -->
 </head>
 <body>
     <h1>Bienvenido a mi Página Web</h1>
@@ -13,6 +13,20 @@
             <li><a href="hanoi.html">Torres de Hanoi</a></li>
         </ul>
     </nav>
-    <script src="js/script.js"></script>
+
+    <!-- Sección para el Optimizador de Conexiones -->
+    <section>
+        <h2>Optimizador de Conexiones en Redes Sociales</h2>
+        <form id="pathForm">
+            <label for="startNode">Nodo de inicio:</label>
+            <input type="text" id="startNode" name="startNode" required>
+            <button type="submit">Calcular Caminos Más Cortos</button>
+        </form>
+        <div id="result"></div> <!-- Área para mostrar los resultados -->
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/dijkstra.js"></script> <!-- Algoritmo de Dijkstra -->
+    <script src="js/app.js"></script> <!-- Lógica del frontend -->
 </body>
 </html>
