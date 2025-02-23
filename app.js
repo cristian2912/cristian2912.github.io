@@ -1,6 +1,4 @@
-// app.js
-
-// Importar la función dijkstra desde dijkstra.js
+// js/app.js
 import { dijkstra } from './dijkstra.js';
 
 // Datos del grafo (puedes modificarlos según tu red social)
