@@ -1,4 +1,4 @@
-// js/dijkstra.js
+// dijkstra.js
 function dijkstra(graph, start) {
     const distances = {};
     const visited = new Set();
