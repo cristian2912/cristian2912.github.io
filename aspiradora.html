@@ -10,8 +10,8 @@
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(10, 40px);
-            grid-template-rows: repeat(10, 40px);
+            grid-template-columns: repeat(8, 40px);
+            grid-template-rows: repeat(8, 40px);
             gap: 2px;
         }
         .cell {
@@ -40,11 +40,12 @@
     <button onclick="stopCleaning()">Detener Limpieza</button>
 
     <script>
-        const gridSize = 10;
+        const gridSize = 8;
         const grid = document.getElementById('grid');
-        let robotPosition = { x: 0, y: 0 };
-        let obstacles = [{ x: 2, y: 2 }, { x: 5, y: 5 }, { x: 7, y: 8 }]; // Ejemplo de obstáculos
+        let robotPosition = { x: 0, y: 0 }; // Empieza en a8 (0, 0)
+        let obstacles = [{ x: 1, y: 2 }, { x: 5, y: 5 }, { x: 6, y: 3 }]; // Ejemplo de obstáculos
         let cleaningInterval;
+        let direction = 1; // 1 para derecha, -1 para izquierda
 
         function createGrid() {
             for (let y = 0; y < gridSize; y++) {
@@ -65,21 +66,67 @@
             let newX = robotPosition.x;
             let newY = robotPosition.y;
 
-            // Mover a la derecha, si no hay obstáculo
-            if (robotPosition.x < gridSize - 1 && !obstacles.some(obs => obs.x === robotPosition.x + 1 && obs.y === robotPosition.y)) {
-                newX = robotPosition.x + 1;
-            } else if (robotPosition.y < gridSize - 1 && !obstacles.some(obs => obs.x === robotPosition.x && obs.y === robotPosition.y + 1)) {
-                // Mover hacia abajo si no se puede mover a la derecha
-                newY = robotPosition.y + 1;
-                newX = 0; // Reiniciar la posición horizontal
-            } else if (robotPosition.y < gridSize - 1) {
-                // Si no se puede mover a la derecha ni hacia abajo, buscar otra dirección
-                newY = robotPosition.y + 1;
-                newX = 0;
+            if (direction === 1) {
+                // Moverse a la derecha
+                if (robotPosition.x < gridSize - 1 && !obstacles.some(obs => obs.x === robotPosition.x + 1 && obs.y === robotPosition.y)) {
+                    newX = robotPosition.x + 1;
+                } else if (robotPosition.x < gridSize - 1) {
+                    // Esquivar obstáculo: subir a la fila anterior, moverse a la derecha y bajar
+                    if (robotPosition.y > 0) {
+                        newY = robotPosition.y - 1;
+                        newX = robotPosition.x + 1;
+                        if (obstacles.some(obs => obs.x === newX && obs.y === newY)) {
+                            // Si la casilla superior también está bloqueada, reiniciar
+                            newX = 0;
+                            newY = robotPosition.y + 1;
+                            direction = -1;
+                        } else {
+                            // Bajar a la fila original después de esquivar
+                            setTimeout(() => {
+                                robotPosition.y += 1;
+                                updateGrid();
+                            }, 500);
+                        }
+                    }
+                } else {
+                    // Cambiar de dirección y bajar
+                    newY = robotPosition.y + 1;
+                    direction = -1;
+                }
             } else {
-                // Si no hay más movimientos posibles, reiniciar
+                // Moverse a la izquierda
+                if (robotPosition.x > 0 && !obstacles.some(obs => obs.x === robotPosition.x - 1 && obs.y === robotPosition.y)) {
+                    newX = robotPosition.x - 1;
+                } else if (robotPosition.x > 0) {
+                    // Esquivar obstáculo: subir a la fila anterior, moverse a la izquierda y bajar
+                    if (robotPosition.y > 0) {
+                        newY = robotPosition.y - 1;
+                        newX = robotPosition.x - 1;
+                        if (obstacles.some(obs => obs.x === newX && obs.y === newY)) {
+                            // Si la casilla superior también está bloqueada, reiniciar
+                            newX = gridSize - 1;
+                            newY = robotPosition.y + 1;
+                            direction = 1;
+                        } else {
+                            // Bajar a la fila original después de esquivar
+                            setTimeout(() => {
+                                robotPosition.y += 1;
+                                updateGrid();
+                            }, 500);
+                        }
+                    }
+                } else {
+                    // Cambiar de dirección y bajar
+                    newY = robotPosition.y + 1;
+                    direction = 1;
+                }
+            }
+
+            // Si se sale del grid, reiniciar
+            if (newY >= gridSize) {
                 newX = 0;
                 newY = 0;
+                direction = 1;
             }
 
             robotPosition.x = newX;
