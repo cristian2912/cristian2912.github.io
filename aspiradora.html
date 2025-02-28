@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Aspiradora</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, 40px);
+            grid-template-rows: repeat(10, 40px);
+            gap: 2px;
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .robot {
+            background-color: #4CAF50;
+        }
+        .obstacle {
+            background-color: #f44336;
+        }
+        .clean {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simulación de Robot Aspiradora</h1>
+    <div class="grid" id="grid"></div>
+    <button onclick="startCleaning()">Comenzar Limpieza</button>
+
+    <script>
+        const gridSize = 10;
+        const grid = document.getElementById('grid');
+        let robotPosition = { x: 0, y: 0 };
+        let obstacles = [{ x: 2, y: 2 }, { x: 5, y: 5 }, { x: 7, y: 8 }]; // Ejemplo de obstáculos
+
+        function createGrid() {
+            for (let y = 0; y < gridSize; y++) {
+                for (let x = 0; x < gridSize; x++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    if (x === robotPosition.x && y === robotPosition.y) {
+                        cell.classList.add('robot');
+                    } else if (obstacles.some(obs => obs.x === x && obs.y === y)) {
+                        cell.classList.add('obstacle');
+                    }
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        function moveRobot() {
+            let newX = robotPosition.x + 1;
+            if (newX >= gridSize) {
+                newX = 0;
+                robotPosition.y = (robotPosition.y + 1) % gridSize;
+            }
+            robotPosition.x = newX;
+
+            if (!obstacles.some(obs => obs.x === robotPosition.x && obs.y === robotPosition.y)) {
+                updateGrid();
+            } else {
+                moveRobot();
+            }
+        }
+
+        function updateGrid() {
+            grid.innerHTML = '';
+            createGrid();
+        }
+
+        function startCleaning() {
+            setInterval(moveRobot, 500); // Mueve el robot cada 500ms
+        }
+
+        createGrid();
+    </script>
+</body>
+</html>
