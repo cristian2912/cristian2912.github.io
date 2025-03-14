@@ -1,30 +1,3 @@
-class Dron {
-    constructor() {
-        this.bateria = 100; // Batería inicial (100%)
-        this.capacidadMaxima = 100; // Capacidad máxima de la batería
-    }
-
-    consumirBateria(distancia, condicionesClimaticas) {
-        let consumo = distancia; // Consumo base
-        if (condicionesClimaticas.viento) {
-            consumo += 5; // Aumento del consumo por viento
-        }
-        if (condicionesClimaticas.lluvia) {
-            consumo += 10; // Aumento del consumo por lluvia
-        }
-        this.bateria -= consumo;
-        if (this.bateria < 0) this.bateria = 0;
-    }
-
-    recargar() {
-        this.bateria = this.capacidadMaxima;
-    }
-
-    getBateria() {
-        return this.bateria;
-    }
-}
-
 class Grafo {
     constructor() {
         this.nodos = new Set();
