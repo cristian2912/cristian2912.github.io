@@ -1,8 +1,8 @@
 document.getElementById('dronForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Evitar que el formulario se envíe
 
-    const inicio = document.getElementById('startDron').value;
-    const destino = document.getElementById('endDron').value;
+    const inicio = document.getElementById('startDron').value.toUpperCase();
+    const destino = document.getElementById('endDron').value.toUpperCase();
     const resultDron = document.getElementById('resultDron');
     const rutaOptima = document.getElementById('rutaOptima');
     const consumoBateria = document.getElementById('consumoBateria');
@@ -21,6 +21,15 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
 
     const zonasInterferencia = new Set(['D']); // Zonas de interferencia
     const puntosRecarga = new Set(['C', 'E']); // Puntos de recarga
+
+    // Validar que los nodos de inicio y destino existan en el grafo
+    if (!grafo[inicio] || !grafo[destino]) {
+        rutaOptima.textContent = "Error: Nodo de inicio o destino no válido.";
+        consumoBateria.textContent = "";
+        graficaRuta.innerHTML = "";
+        desgloseConsumo.innerHTML = "";
+        return;
+    }
 
     const { ruta, costo, desglose } = dijkstraConRestricciones(grafo, inicio, destino, zonasInterferencia, puntosRecarga);
 
