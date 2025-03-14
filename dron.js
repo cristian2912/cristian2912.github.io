@@ -1,4 +1,28 @@
 // dron.js
+
+function ejecutarDron() {
+    const grafo = crearGrafo();
+    const zonasInterferencia = new Set(['D']); // Zonas de interferencia
+    const puntosRecarga = new Set(['C', 'E']); // Puntos de recarga
+
+    const inicio = prompt("Ingrese el punto de inicio (A, B, C, D, E, F):").toUpperCase();
+    const destino = prompt("Ingrese el punto de destino (A, B, C, D, E, F):").toUpperCase();
+
+    if (!grafo.nodos.has(inicio) || !grafo.nodos.has(destino)) {
+        alert("Error: Puntos de inicio o destino no válidos.");
+        return;
+    }
+
+    const { ruta, costo } = grafo.dijkstraConRestricciones(inicio, destino, zonasInterferencia, puntosRecarga);
+
+    const resultDron = document.getElementById('resultDron');
+    if (ruta) {
+        resultDron.innerHTML = `<pre>Ruta óptima: ${ruta.join(' -> ')}\nConsumo total de batería: ${costo}</pre>`;
+    } else {
+        resultDron.innerHTML = "<pre>No se encontró una ruta válida.</pre>";
+    }
+}
+
 class Grafo {
     constructor() {
         this.nodos = new Set();
@@ -41,9 +65,9 @@ class Grafo {
 
             this.aristas[actual].forEach(({ nodo: vecino, peso }) => {
                 if (!zonasInterferencia.has(vecino)) {
-                    const nuevoCosto = costo + peso;
+                    let nuevoCosto = costo + peso;
 
-                    if (vecino in puntosRecarga) {
+                    if (puntosRecarga.has(vecino)) {
                         nuevoCosto -= 10; // Reducir costo si es un punto de recarga
                     }
 
@@ -60,7 +84,6 @@ class Grafo {
     }
 }
 
-// Crear el grafo
 function crearGrafo() {
     const grafo = new Grafo();
     grafo.agregarNodo('A');
@@ -81,29 +104,3 @@ function crearGrafo() {
 
     return grafo;
 }
-
-// Función principal
-function main() {
-    const grafo = crearGrafo();
-    const zonasInterferencia = new Set(['D']); // Zonas de interferencia
-    const puntosRecarga = new Set(['C', 'E']); // Puntos de recarga
-
-    const inicio = prompt("Ingrese el punto de inicio (A, B, C, D, E, F):").toUpperCase();
-    const destino = prompt("Ingrese el punto de destino (A, B, C, D, E, F):").toUpperCase();
-
-    if (!grafo.nodos.has(inicio) || !grafo.nodos.has(destino)) {
-        alert("Error: Puntos de inicio o destino no válidos.");
-        return;
-    }
-
-    const { ruta, costo } = grafo.dijkstraConRestricciones(inicio, destino, zonasInterferencia, puntosRecarga);
-
-    if (ruta) {
-        alert(`Ruta óptima: ${ruta.join(' -> ')}\nConsumo total de batería: ${costo}`);
-    } else {
-        alert("No se encontró una ruta válida.");
-    }
-}
-
-// Ejecutar la función principal
-main();
