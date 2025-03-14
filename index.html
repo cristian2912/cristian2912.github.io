@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planificación de Rutas para Drones</title>
+    <title>Mi Página Web</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,68 +15,26 @@
         section {
             margin-bottom: 30px;
         }
-        label {
-            display: block;
-            margin-top: 10px;
+        a {
+            color: #007BFF;
+            text-decoration: none;
         }
-        input {
-            margin-bottom: 10px;
-            padding: 5px;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Planificación de Rutas para Drones</h1>
-
-    <!-- Sección para el Dron -->
-    <section>
-        <h2>Calcular Ruta Óptima</h2>
-        <label for="startNode">Nodo de inicio:</label>
-        <select id="startNode">
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="E">E</option>
-            <option value="F">F</option>
-        </select>
-        <label for="endNode">Nodo de destino:</label>
-        <select id="endNode">
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="E">E</option>
-            <option value="F">F</option>
-        </select>
-        <button id="calcularRuta">Calcular Ruta</button>
-    </section>
-
-    <!-- Resultados -->
-    <section id="resultados">
-        <h2>Resultados</h2>
-        <p id="rutaOptima"></p>
-        <p id="consumoBateria"></p>
-    </section>
-
-    <!-- Scripts -->
-    <script src="dron.js"></script>
-    <script src="app.js"></script>
+    <h1>Bienvenido a mi Página Web</h1>
+    <nav>
+        <ul>
+            <li><a href="aplicaci6n.js">Aplicación JS</a></li>
+            <li><a href="aspiradora.html">Aspiradora</a></li>
+            <li><a href="dijkstra.js">Dijkstra</a></li>
+            <li><a href="dron.js">Dron</a></li>
+            <li><a href="hanoi.html">Torres de Hanoi</a></li>
+            <li><a href="índice.html">Índice</a></li>
+        </ul>
+    </nav>
 </body>
 </html>
