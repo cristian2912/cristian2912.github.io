@@ -37,9 +37,30 @@ button:hover {
     margin-top: 20px;
 }
 
-#rutaChart {
-    max-width: 600px;
+#graficaRuta {
     margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tramo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.nodo {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 50%;
+    margin: 0 10px;
+}
+
+.flecha {
+    font-size: 20px;
+    margin: 0 10px;
 }
 
 #desgloseConsumo {
