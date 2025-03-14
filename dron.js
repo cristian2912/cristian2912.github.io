@@ -1,12 +1,12 @@
 document.getElementById('dronForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitar que el formulario se envíe
+    event.preventDefault();
 
     const inicio = document.getElementById('startDron').value.toUpperCase();
     const destino = document.getElementById('endDron').value.toUpperCase();
     const rutaOptima = document.getElementById('rutaOptima');
     const consumoBateria = document.getElementById('consumoBateria');
 
-    // Simulación de un grafo (puedes reemplazar esto con tu lógica real)
+    // Definimos el grafo con distancias entre nodos
     const grafo = {
         'A': { 'B': 4, 'C': 2 },
         'B': { 'A': 4, 'C': 5, 'D': 10 },
@@ -16,12 +16,19 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
         'F': { 'D': 11, 'E': 5 }
     };
 
-    const zonasInterferencia = new Set(['D']); // Zonas de interferencia
-    const puntosRecarga = new Set(['C', 'E']); // Puntos de recarga
+    const zonasInterferencia = new Set(['D']); // Lugares a evitar
+    const puntosRecarga = new Set(['C', 'E']); // Lugares donde se puede recargar
 
-    // Validar que los nodos de inicio y destino existan en el grafo
+    // Validar entrada
     if (!grafo[inicio] || !grafo[destino]) {
         rutaOptima.textContent = "Error: Nodo de inicio o destino no válido.";
+        consumoBateria.textContent = "";
+        return;
+    }
+
+    // Si el destino es una zona de interferencia, el dron no puede llegar
+    if (zonasInterferencia.has(destino)) {
+        rutaOptima.textContent = "Error: El nodo de destino está en una zona de interferencia.";
         consumoBateria.textContent = "";
         return;
     }
@@ -38,35 +45,35 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
 });
 
 function dijkstraConRestricciones(grafo, inicio, destino, zonasInterferencia, puntosRecarga) {
-    const cola = [];
     const distancias = {};
     const rutas = {};
+    const cola = [];
 
-    // Inicializar distancias y rutas
-    Object.keys(grafo).forEach(nodo => {
+    // Inicializar valores
+    for (let nodo in grafo) {
         distancias[nodo] = Infinity;
         rutas[nodo] = [];
-    });
+    }
     distancias[inicio] = 0;
     rutas[inicio] = [inicio];
 
-    // Usar un montículo para priorizar nodos
     cola.push({ nodo: inicio, costo: 0 });
 
     while (cola.length > 0) {
-        cola.sort((a, b) => a.costo - b.costo); // Ordenar por costo
+        cola.sort((a, b) => a.costo - b.costo);
         const { nodo: actual, costo } = cola.shift();
 
         if (actual === destino) {
             return { ruta: rutas[actual], costo };
         }
 
-        Object.keys(grafo[actual]).forEach(vecino => {
+        for (let vecino in grafo[actual]) {
             if (!zonasInterferencia.has(vecino)) {
                 let nuevoCosto = costo + grafo[actual][vecino];
 
+                // Descuento de batería si es un punto de recarga
                 if (puntosRecarga.has(vecino)) {
-                    nuevoCosto -= 10; // Reducir costo si es un punto de recarga
+                    nuevoCosto = Math.max(nuevoCosto - 10, 0);
                 }
 
                 if (nuevoCosto < distancias[vecino]) {
@@ -75,8 +82,8 @@ function dijkstraConRestricciones(grafo, inicio, destino, zonasInterferencia, pu
                     cola.push({ nodo: vecino, costo: nuevoCosto });
                 }
             }
-        });
+        }
     }
 
-    return { ruta: null, costo: Infinity }; // Si no se encuentra ruta
+    return { ruta: null, costo: Infinity };
 }
