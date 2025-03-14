@@ -38,11 +38,84 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
     if (ruta) {
         rutaOptima.textContent = `Ruta óptima: ${ruta.join(' -> ')}`;
         consumoBateria.textContent = `Consumo total de batería: ${costo}%`;
+
+        // Mostrar la visualización 3D de la ruta
+        mostrarRuta3D(grafo, ruta);
     } else {
         rutaOptima.textContent = "No se encontró una ruta válida.";
         consumoBateria.textContent = "";
     }
 });
+
+function mostrarRuta3D(grafo, ruta) {
+    // Configuración de la escena 3D
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Añadir luces
+    const light = new THREE.AmbientLight(0x404040); // Luz ambiental
+    scene.add(light);
+
+    // Crear geometrías para nodos (esferas)
+    const nodeGeometry = new THREE.SphereGeometry(0.1, 32, 32);
+    const nodeMaterial = new THREE.MeshBasicMaterial({ color: 0x0077ff });
+
+    const nodos = {};
+    const conexiones = [];
+
+    // Posiciones de los nodos (para efectos visuales, se colocan de forma dispersa)
+    const posiciones = {
+        'A': new THREE.Vector3(-5, 5, 0),
+        'B': new THREE.Vector3(-3, 5, 0),
+        'C': new THREE.Vector3(-1, 5, 0),
+        'D': new THREE.Vector3(-3, 3, 0),
+        'E': new THREE.Vector3(-1, 3, 0),
+        'F': new THREE.Vector3(1, 3, 0),
+    };
+
+    // Crear nodos 3D
+    for (const nodo in grafo) {
+        const nodoMesh = new THREE.Mesh(nodeGeometry, nodeMaterial);
+        nodoMesh.position.set(posiciones[nodo].x, posiciones[nodo].y, posiciones[nodo].z);
+        scene.add(nodoMesh);
+        nodos[nodo] = nodoMesh;
+    }
+
+    // Crear conexiones (líneas) entre nodos
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00ff00 });
+    for (const nodo in grafo) {
+        for (const vecino in grafo[nodo]) {
+            const lineGeometry = new THREE.Geometry();
+            lineGeometry.vertices.push(nodos[nodo].position);
+            lineGeometry.vertices.push(nodos[vecino].position);
+            const line = new THREE.Line(lineGeometry, lineMaterial);
+            scene.add(line);
+            conexiones.push(line);
+        }
+    }
+
+    // Resaltar la ruta óptima en 3D
+    const rutaMaterial = new THREE.LineBasicMaterial({ color: 0xff0000 });
+    for (let i = 0; i < ruta.length - 1; i++) {
+        const lineaRutaGeometry = new THREE.Geometry();
+        lineaRutaGeometry.vertices.push(nodos[ruta[i]].position);
+        lineaRutaGeometry.vertices.push(nodos[ruta[i + 1]].position);
+        const lineaRuta = new THREE.Line(lineaRutaGeometry, rutaMaterial);
+        scene.add(lineaRuta);
+    }
+
+    camera.position.z = 10;
+
+    // Función de animación
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+    animate();
+}
 
 function dijkstraConRestricciones(grafo, inicio, destino, zonasInterferencia, puntosRecarga) {
     const distancias = {};
