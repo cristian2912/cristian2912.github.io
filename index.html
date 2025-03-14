@@ -3,73 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador de Conexiones y Drones</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        section {
-            margin-bottom: 30px;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-        input {
-            margin-bottom: 10px;
-            padding: 5px;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        pre {
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-    </style>
+    <title>Planificación de Rutas para Drones</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Bienvenido a mi Página Web</h1>
-    <nav>
-        <ul>
-            <li><a href="hanoi.html">Torres de Hanoi</a></li>
-            <li><a href="aspiradora.html">Robot Aspiradora</a></li>
-        </ul>
-    </nav>
+    <h1>Planificación de Rutas para Drones</h1>
+    <div id="map"></div> <!-- Mapa interactivo -->
+    <div id="controls">
+        <label for="startNode">Nodo de inicio:</label>
+        <select id="startNode">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+        </select>
+        <label for="endNode">Nodo de destino:</label>
+        <select id="endNode">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+        </select>
+        <button id="calcularRuta">Calcular Ruta</button>
+    </div>
+    <div id="resultados">
+        <h2>Resultados</h2>
+        <p id="rutaOptima"></p>
+        <p id="consumoBateria"></p>
+        <p id="condicionesClimaticas"></p>
+    </div>
 
-    <!-- Sección para el Optimizador de Conexiones en Redes Sociales -->
-    <section>
-        <h2>Optimizador de Conexiones en Redes Sociales</h2>
-        <form id="pathForm">
-            <label for="startNode">Nodo de inicio:</label>
-            <input type="text" id="startNode" name="startNode" required>
-            <button type="submit">Calcular Caminos Más Cortos</button>
-        </form>
-        <div id="result"></div> <!-- Área para mostrar los resultados -->
-    </section>
-
-    <!-- Sección para el Dron -->
-    <section>
-        <h2>Planificación de Rutas para Drones</h2>
-        <button id="ejecutarDronBtn">Ejecutar Dron</button>
-        <div id="resultDron"></div> <!-- Área para mostrar los resultados del dron -->
-    </section>
-
-    <!-- Scripts -->
-    <script type="module" src="./app.js"></script>
-    <script src="./dron.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="dron.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
