@@ -98,4 +98,58 @@ Los pesos de las conexiones se determinaron en función de:
 
    Desventaja: Requiere una heurística adecuada para ser eficiente.
 
-   En este caso, A sería más eficiente, especialmente en mapas grandes, porque reduce el número de nodos explorados al dirigirse directamente hacia el destino. Sin embargo, Dijkstra es más simple y suficiente para mapas pequeños o medianos.
+   En este caso, A sería más eficiente, especialmente en mapas grandes, porque reduce el número de nodos explorados al dirigirse directamente hacia el destino. Sin embargo, Dijkstra es más simple y suficiente 
+   para mapas pequeños o medianos.
+
+
+
+# Documento
+
+Explicación del Proyecto: Planificación de Rutas para Drones 
+
+Descripción general:
+
+Este proyecto implementa un sistema de planificación de rutas para drones en una ciudad representada como un gráfico . El objetivo es encontrar la mejor ruta entre dos puntos mientras se consideran restricciones como zonas de interferencia, puntos de recarga y condiciones de batería.
+
+Estructura del grafo:
+Cada intersección de la ciudad se representa como un nodo , y los caminos entre ellos son aristas con pesos (distancias o costos en batería).
+
+![image](https://github.com/user-attachments/assets/c9019191-63a7-4bd5-9560-fd61b2b2af85)
+
+Nodos y conexiones
+Nodos (Intersecciones en la ciudad) :A, B, C, D, E, F
+Aristas (Caminos con peso o costo) :    
+A → B (4)    
+A → C (2)   
+B → C (5)   
+B → D (10)   
+C → E (3)   
+D → E (4)   
+D → F (11)   
+E → F (5)   
+
+Restricciones consideradas    
+Zonas de Interferencia (Prohibido pasar)    
+
+Nodo D es una zona de interferencia electromagnética .     
+Los drones no pueden pasar por este nodo.    
+Puntos de Recarga (Reducen el costo de la batería)   
+
+Nodo C    
+Nodo E     
+Si el dron pasa por estos nodos, su costo de batería se reduce en -10 unidades.   
+
+Cálculo de ruta     
+
+Evita zonas prohibidas y trata de minimizar el consumo de batería.    
+Se muestra la mejor ruta junto con el costo en batería.    
+
+
+Ejemplo de Ejecución         
+ Si el usuario ingresa:   
+
+Inicio: A    
+Destino: F    
+El algoritmo busca la mejor ruta evitando D.    
+Ruta óptima: A → C → E → F     
+Consumo total de batería: dependerá de los cálculos    
