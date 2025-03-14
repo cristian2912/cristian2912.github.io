@@ -19,7 +19,10 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
         'F': { 'D': 11, 'E': 5 }
     };
 
-    const { ruta, costo, desglose } = dijkstraConRestricciones(grafo, inicio, destino, new Set(['D']), new Set(['C', 'E']));
+    const zonasInterferencia = new Set(['D']); // Zonas de interferencia
+    const puntosRecarga = new Set(['C', 'E']); // Puntos de recarga
+
+    const { ruta, costo, desglose } = dijkstraConRestricciones(grafo, inicio, destino, zonasInterferencia, puntosRecarga);
 
     if (ruta) {
         rutaOptima.textContent = `Ruta óptima: ${ruta.join(' -> ')}`;
