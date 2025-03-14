@@ -6,6 +6,7 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
     const resultDron = document.getElementById('resultDron');
     const rutaOptima = document.getElementById('rutaOptima');
     const consumoBateria = document.getElementById('consumoBateria');
+    const graficaRuta = document.getElementById('graficaRuta');
     const desgloseConsumo = document.getElementById('desgloseConsumo');
 
     // Simulación de un grafo (puedes reemplazar esto con tu lógica real)
@@ -24,6 +25,27 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
         rutaOptima.textContent = `Ruta óptima: ${ruta.join(' -> ')}`;
         consumoBateria.textContent = `Consumo total de batería: ${costo}%`;
 
+        // Mostrar gráfica de la ruta
+        graficaRuta.innerHTML = "<h4>Diagrama de la ruta:</h4>";
+        ruta.forEach((nodo, index) => {
+            const tramo = document.createElement('div');
+            tramo.className = 'tramo';
+
+            const nodoDiv = document.createElement('div');
+            nodoDiv.className = 'nodo';
+            nodoDiv.textContent = nodo;
+            tramo.appendChild(nodoDiv);
+
+            if (index < ruta.length - 1) {
+                const flecha = document.createElement('div');
+                flecha.className = 'flecha';
+                flecha.textContent = '→';
+                tramo.appendChild(flecha);
+            }
+
+            graficaRuta.appendChild(tramo);
+        });
+
         // Mostrar desglose del consumo
         desgloseConsumo.innerHTML = "<h4>Desglose del consumo:</h4>";
         desglose.forEach((tramo, index) => {
@@ -32,12 +54,10 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
             div.textContent = `Tramo ${index + 1}: ${tramo.desde} -> ${tramo.hacia} | Consumo: ${tramo.consumo}%`;
             desgloseConsumo.appendChild(div);
         });
-
-        // Mostrar gráfica de la ruta
-        mostrarGrafica(ruta);
     } else {
         rutaOptima.textContent = "No se encontró una ruta válida.";
         consumoBateria.textContent = "";
+        graficaRuta.innerHTML = "";
         desgloseConsumo.innerHTML = "";
     }
 });
@@ -86,30 +106,4 @@ function dijkstraConRestricciones(grafo, inicio, destino, zonasInterferencia, pu
     }
 
     return { ruta: null, costo: Infinity, desglose: [] }; // Si no se encuentra ruta
-}
-
-function mostrarGrafica(ruta) {
-    const ctx = document.getElementById('rutaChart').getContext('2d');
-    const labels = ruta;
-    const data = ruta.map((nodo, index) => index * 10); // Simulación de datos para la gráfica
-
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: labels,
-            datasets: [{
-                label: 'Ruta Óptima',
-                data: data,
-                borderColor: '#007BFF',
-                fill: false,
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
 }
