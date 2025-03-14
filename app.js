@@ -1,54 +1,35 @@
 // app.js
 
-document.getElementById('pathForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitar que el formulario se envíe
+const map = L.map('map').setView([51.505, -0.09], 13); // Coordenadas iniciales del mapa
 
-    const startNode = document.getElementById('startNode').value;
-    const resultDiv = document.getElementById('result');
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+}).addTo(map);
 
-    // Simulación de un grafo (puedes reemplazar esto con tu lógica real)
-    const graph = {
-        'A': { 'B': 1, 'C': 4 },
-        'B': { 'A': 1, 'C': 2, 'D': 5 },
-        'C': { 'A': 4, 'B': 2, 'D': 1 },
-        'D': { 'B': 5, 'C': 1 }
-    };
+const grafo = crearGrafo();
+const dron = new Dron();
+const zonasInterferencia = new Set(['D']);
+const puntosRecarga = new Set(['C', 'E']);
 
-    // Implementación básica de Dijkstra
-    const shortestPaths = dijkstra(graph, startNode);
-    resultDiv.innerHTML = `<pre>Caminos más cortos desde ${startNode}:\n${JSON.stringify(shortestPaths, null, 2)}</pre>`;
-});
+document.getElementById('calcularRuta').addEventListener('click', () => {
+    const inicio = document.getElementById('startNode').value;
+    const destino = document.getElementById('endNode').value;
 
-function dijkstra(graph, start) {
-    const distances = {};
-    const visited = new Set();
-    const nodes = Object.keys(graph);
+    const { ruta, costo } = grafo.dijkstraConRestricciones(inicio, destino, zonasInterferencia, puntosRecarga);
 
-    // Inicializar distancias
-    nodes.forEach(node => distances[node] = Infinity);
-    distances[start] = 0;
+    if (ruta) {
+        document.getElementById('rutaOptima').textContent = `Ruta óptima: ${ruta.join(' -> ')}`;
+        document.getElementById('consumoBateria').textContent = `Consumo de batería: ${costo}%`;
 
-    while (nodes.length) {
-        // Seleccionar el nodo con la distancia mínima
-        nodes.sort((a, b) => distances[a] - distances[b]);
-        const closestNode = nodes.shift();
+        // Simular condiciones climáticas
+        const condicionesClimaticas = {
+            viento: Math.random() > 0.5,
+            lluvia: Math.random() > 0.5
+        };
 
-        // Si la distancia es infinita, el nodo no es alcanzable
-        if (distances[closestNode] === Infinity) break;
-
-        // Marcar el nodo como visitado
-        visited.add(closestNode);
-
-        // Actualizar las distancias de los nodos vecinos
-        Object.keys(graph[closestNode]).forEach(neighbor => {
-            if (!visited.has(neighbor)) {
-                const newDistance = distances[closestNode] + graph[closestNode][neighbor];
-                if (newDistance < distances[neighbor]) {
-                    distances[neighbor] = newDistance;
-                }
-            }
-        });
+        dron.consumirBateria(costo, condicionesClimaticas);
+        document.getElementById('condicionesClimaticas').textContent = `Condiciones climáticas: ${condicionesClimaticas.viento ? 'Viento fuerte' : 'Sin viento'}, ${condicionesClimaticas.lluvia ? 'Lluvia' : 'Sin lluvia'}`;
+    } else {
+        document.getElementById('rutaOptima').textContent = "No se encontró una ruta válida.";
     }
-
-    return distances;
-}
+});
