@@ -3,7 +3,6 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
 
     const inicio = document.getElementById('startDron').value.toUpperCase();
     const destino = document.getElementById('endDron').value.toUpperCase();
-    const resultDron = document.getElementById('resultDron');
     const rutaOptima = document.getElementById('rutaOptima');
     const consumoBateria = document.getElementById('consumoBateria');
 
