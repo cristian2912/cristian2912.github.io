@@ -1,41 +1,54 @@
 // app.js
-import { dijkstra } from './dijkstra.js';
 
-// Datos del grafo (puedes modificarlos según tu red social)
-const graph = {
-    A: { B: 1, D: 1 },
-    B: { A: 1, C: 1 },
-    C: { B: 1, D: 1 },
-    D: { A: 1, C: 1 },
-};
+document.getElementById('pathForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evitar que el formulario se envíe
 
-// Manejar el envío del formulario
-document.getElementById('pathForm').addEventListener('submit', (e) => {
-    e.preventDefault(); // Evitar que el formulario se envíe
+    const startNode = document.getElementById('startNode').value;
+    const resultDiv = document.getElementById('result');
 
-    // Obtener el nodo de inicio ingresado por el usuario
-    const startNode = document.getElementById('startNode').value.trim().toUpperCase();
+    // Simulación de un grafo (puedes reemplazar esto con tu lógica real)
+    const graph = {
+        'A': { 'B': 1, 'C': 4 },
+        'B': { 'A': 1, 'C': 2, 'D': 5 },
+        'C': { 'A': 4, 'B': 2, 'D': 1 },
+        'D': { 'B': 5, 'C': 1 }
+    };
 
-    // Validar que el nodo de inicio exista en el grafo
-    if (!graph[startNode]) {
-        alert('Nodo de inicio no válido. Introduce un nodo existente (A, B, C, D).');
-        return;
-    }
-
-    // Calcular los caminos más cortos usando Dijkstra
-    const distances = dijkstra(graph, startNode);
-
-    // Mostrar los resultados en la página
-    displayResults(startNode, distances);
+    // Implementación básica de Dijkstra
+    const shortestPaths = dijkstra(graph, startNode);
+    resultDiv.innerHTML = `<pre>Caminos más cortos desde ${startNode}:\n${JSON.stringify(shortestPaths, null, 2)}</pre>`;
 });
 
-// Función para mostrar los resultados en la página
-function displayResults(start, distances) {
-    const resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = `<h2>Resultados desde ${start}:</h2>`;
+function dijkstra(graph, start) {
+    const distances = {};
+    const visited = new Set();
+    const nodes = Object.keys(graph);
 
-    // Recorrer las distancias y mostrarlas
-    for (const [node, distance] of Object.entries(distances)) {
-        resultDiv.innerHTML += `<p>${node}: ${distance === Infinity ? 'No alcanzable' : distance}</p>`;
+    // Inicializar distancias
+    nodes.forEach(node => distances[node] = Infinity);
+    distances[start] = 0;
+
+    while (nodes.length) {
+        // Seleccionar el nodo con la distancia mínima
+        nodes.sort((a, b) => distances[a] - distances[b]);
+        const closestNode = nodes.shift();
+
+        // Si la distancia es infinita, el nodo no es alcanzable
+        if (distances[closestNode] === Infinity) break;
+
+        // Marcar el nodo como visitado
+        visited.add(closestNode);
+
+        // Actualizar las distancias de los nodos vecinos
+        Object.keys(graph[closestNode]).forEach(neighbor => {
+            if (!visited.has(neighbor)) {
+                const newDistance = distances[closestNode] + graph[closestNode][neighbor];
+                if (newDistance < distances[neighbor]) {
+                    distances[neighbor] = newDistance;
+                }
+            }
+        });
     }
+
+    return distances;
 }
