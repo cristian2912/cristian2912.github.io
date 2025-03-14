@@ -4,6 +4,9 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
     const inicio = document.getElementById('startDron').value;
     const destino = document.getElementById('endDron').value;
     const resultDron = document.getElementById('resultDron');
+    const rutaOptima = document.getElementById('rutaOptima');
+    const consumoBateria = document.getElementById('consumoBateria');
+    const desgloseConsumo = document.getElementById('desgloseConsumo');
 
     // Simulación de un grafo (puedes reemplazar esto con tu lógica real)
     const grafo = {
@@ -15,12 +18,27 @@ document.getElementById('dronForm').addEventListener('submit', function(event) {
         'F': { 'D': 11, 'E': 5 }
     };
 
-    const { ruta, costo } = dijkstraConRestricciones(grafo, inicio, destino, new Set(['D']), new Set(['C', 'E']));
+    const { ruta, costo, desglose } = dijkstraConRestricciones(grafo, inicio, destino, new Set(['D']), new Set(['C', 'E']));
 
     if (ruta) {
-        resultDron.innerHTML = `<pre>Ruta óptima: ${ruta.join(' -> ')}\nConsumo de batería: ${costo}%</pre>`;
+        rutaOptima.textContent = `Ruta óptima: ${ruta.join(' -> ')}`;
+        consumoBateria.textContent = `Consumo total de batería: ${costo}%`;
+
+        // Mostrar desglose del consumo
+        desgloseConsumo.innerHTML = "<h4>Desglose del consumo:</h4>";
+        desglose.forEach((tramo, index) => {
+            const div = document.createElement('div');
+            div.className = 'consumo-tramo';
+            div.textContent = `Tramo ${index + 1}: ${tramo.desde} -> ${tramo.hacia} | Consumo: ${tramo.consumo}%`;
+            desgloseConsumo.appendChild(div);
+        });
+
+        // Mostrar gráfica de la ruta
+        mostrarGrafica(ruta);
     } else {
-        resultDron.innerHTML = "<pre>No se encontró una ruta válida.</pre>";
+        rutaOptima.textContent = "No se encontró una ruta válida.";
+        consumoBateria.textContent = "";
+        desgloseConsumo.innerHTML = "";
     }
 });
 
@@ -28,6 +46,7 @@ function dijkstraConRestricciones(grafo, inicio, destino, zonasInterferencia, pu
     const cola = [];
     const distancias = {};
     const rutas = {};
+    const desglose = [];
 
     // Inicializar distancias y rutas
     Object.keys(grafo).forEach(nodo => {
@@ -45,7 +64,7 @@ function dijkstraConRestricciones(grafo, inicio, destino, zonasInterferencia, pu
         const { nodo: actual, costo } = cola.shift();
 
         if (actual === destino) {
-            return { ruta: rutas[actual], costo };
+            return { ruta: rutas[actual], costo, desglose };
         }
 
         Object.keys(grafo[actual]).forEach(vecino => {
@@ -59,11 +78,38 @@ function dijkstraConRestricciones(grafo, inicio, destino, zonasInterferencia, pu
                 if (nuevoCosto < distancias[vecino]) {
                     distancias[vecino] = nuevoCosto;
                     rutas[vecino] = [...rutas[actual], vecino];
+                    desglose.push({ desde: actual, hacia: vecino, consumo: grafo[actual][vecino] });
                     cola.push({ nodo: vecino, costo: nuevoCosto });
                 }
             }
         });
     }
 
-    return { ruta: null, costo: Infinity }; // Si no se encuentra ruta
+    return { ruta: null, costo: Infinity, desglose: [] }; // Si no se encuentra ruta
+}
+
+function mostrarGrafica(ruta) {
+    const ctx = document.getElementById('rutaChart').getContext('2d');
+    const labels = ruta;
+    const data = ruta.map((nodo, index) => index * 10); // Simulación de datos para la gráfica
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Ruta Óptima',
+                data: data,
+                borderColor: '#007BFF',
+                fill: false,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 }
