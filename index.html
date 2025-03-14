@@ -12,33 +12,73 @@
         h1 {
             color: #333;
         }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
+        section {
+            margin-bottom: 30px;
         }
-        nav ul li {
-            margin: 10px 0;
+        label {
+            display: block;
+            margin-top: 10px;
         }
-        nav ul li a {
-            color: #007BFF;
-            text-decoration: none;
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
         }
-        nav ul li a:hover {
-            text-decoration: underline;
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
         }
     </style>
 </head>
 <body>
     <h1>Bienvenido a mi Página Web</h1>
-    <nav>
+
+    <!-- Sección para el Optimizador de Conexiones en Redes Sociales -->
+    <section>
+        <h2>Optimizador de Conexiones en Redes Sociales</h2>
+        <form id="pathForm">
+            <label for="startNode">Nodo de inicio:</label>
+            <input type="text" id="startNode" name="startNode" required>
+            <button type="submit">Calcular Caminos Más Cortos</button>
+        </form>
+        <div id="result"></div> <!-- Área para mostrar los resultados -->
+    </section>
+
+    <!-- Sección para el Dron -->
+    <section>
+        <h2>Planificación de Rutas para Drones</h2>
+        <form id="dronForm">
+            <label for="startDron">Nodo de inicio:</label>
+            <input type="text" id="startDron" name="startDron" required>
+            <label for="endDron">Nodo de destino:</label>
+            <input type="text" id="endDron" name="endDron" required>
+            <button type="submit">Calcular Ruta</button>
+        </form>
+        <div id="resultDron"></div> <!-- Área para mostrar los resultados del dron -->
+    </section>
+
+    <!-- Enlaces a Aspiradora y Torres de Hanoi -->
+    <section>
+        <h2>Otras Páginas</h2>
         <ul>
-            <li><a href="aplicaci6n.js">Aplicación JS</a></li>
             <li><a href="aspiradora.html">Aspiradora</a></li>
-            <li><a href="dijkstra.js">Dijkstra</a></li>
-            <li><a href="dron.js">Dron</a></li>
             <li><a href="hanoi.html">Torres de Hanoi</a></li>
-            <li><a href="índice.html">Índice</a></li>
         </ul>
-    </nav>
+    </section>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    <script src="dron.js"></script>
 </body>
 </html>
