@@ -1,5 +1,6 @@
 // dron.js
 
+// Función para ejecutar el dron
 function ejecutarDron() {
     const grafo = crearGrafo();
     const zonasInterferencia = new Set(['D']); // Zonas de interferencia
@@ -23,6 +24,7 @@ function ejecutarDron() {
     }
 }
 
+// Clase Grafo
 class Grafo {
     constructor() {
         this.nodos = new Set();
@@ -84,6 +86,7 @@ class Grafo {
     }
 }
 
+// Función para crear el grafo
 function crearGrafo() {
     const grafo = new Grafo();
     grafo.agregarNodo('A');
@@ -104,3 +107,6 @@ function crearGrafo() {
 
     return grafo;
 }
+
+// Vincular el botón "Ejecutar Dron" a la función
+document.getElementById('ejecutarDronBtn').addEventListener('click', ejecutarDron);
