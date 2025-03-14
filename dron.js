@@ -1,5 +1,3 @@
-// dron.js
-
 class Dron {
     constructor() {
         this.bateria = 100; // Batería inicial (100%)
