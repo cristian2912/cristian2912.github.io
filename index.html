@@ -8,11 +8,22 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Planificación de Rutas para Drones</h1>
+    <h1>Bienvenido a mi Página Web</h1>
+
+    <!-- Sección para el Optimizador de Conexiones en Redes Sociales -->
+    <section>
+        <h2>Optimizador de Conexiones en Redes Sociales</h2>
+        <form id="pathForm">
+            <label for="startNode">Nodo de inicio:</label>
+            <input type="text" id="startNode" name="startNode" required>
+            <button type="submit">Calcular Caminos Más Cortos</button>
+        </form>
+        <div id="result"></div> <!-- Área para mostrar los resultados -->
+    </section>
 
     <!-- Sección para el Dron -->
     <section>
-        <h2>Calcular Ruta Óptima</h2>
+        <h2>Planificación de Rutas para Drones</h2>
         <form id="dronForm">
             <label for="startDron">Nodo de inicio:</label>
             <input type="text" id="startDron" name="startDron" required>
@@ -24,12 +35,22 @@
             <h3>Resultados</h3>
             <p id="rutaOptima"></p>
             <p id="consumoBateria"></p>
-            <canvas id="rutaChart"></canvas> <!-- Gráfica de la ruta -->
+            <div id="graficaRuta"></div> <!-- Diagrama de flujo de la ruta -->
             <div id="desgloseConsumo"></div> <!-- Desglose del consumo -->
         </div>
     </section>
 
+    <!-- Enlaces a Aspiradora y Torres de Hanoi -->
+    <section>
+        <h2>Otras Páginas</h2>
+        <ul>
+            <li><a href="aspiradora.html">Aspiradora</a></li>
+            <li><a href="hanoi.html">Torres de Hanoi</a></li>
+        </ul>
+    </section>
+
     <!-- Scripts -->
+    <script src="app.js"></script>
     <script src="dron.js"></script>
 </body>
 </html>
