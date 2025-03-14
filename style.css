@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#resultDron {
+    margin-top: 20px;
+}
+
+#rutaChart {
+    max-width: 600px;
+    margin: 20px 0;
+}
+
+#desgloseConsumo {
+    margin-top: 20px;
+}
+
+.consumo-tramo {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+}
