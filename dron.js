@@ -1,30 +1,32 @@
 // dron.js
 
-// Función para ejecutar el dron
-function ejecutarDron() {
-    const grafo = crearGrafo();
-    const zonasInterferencia = new Set(['D']); // Zonas de interferencia
-    const puntosRecarga = new Set(['C', 'E']); // Puntos de recarga
-
-    const inicio = prompt("Ingrese el punto de inicio (A, B, C, D, E, F):").toUpperCase();
-    const destino = prompt("Ingrese el punto de destino (A, B, C, D, E, F):").toUpperCase();
-
-    if (!grafo.nodos.has(inicio) || !grafo.nodos.has(destino)) {
-        alert("Error: Puntos de inicio o destino no válidos.");
-        return;
+class Dron {
+    constructor() {
+        this.bateria = 100; // Batería inicial (100%)
+        this.capacidadMaxima = 100; // Capacidad máxima de la batería
     }
 
-    const { ruta, costo } = grafo.dijkstraConRestricciones(inicio, destino, zonasInterferencia, puntosRecarga);
+    consumirBateria(distancia, condicionesClimaticas) {
+        let consumo = distancia; // Consumo base
+        if (condicionesClimaticas.viento) {
+            consumo += 5; // Aumento del consumo por viento
+        }
+        if (condicionesClimaticas.lluvia) {
+            consumo += 10; // Aumento del consumo por lluvia
+        }
+        this.bateria -= consumo;
+        if (this.bateria < 0) this.bateria = 0;
+    }
 
-    const resultDron = document.getElementById('resultDron');
-    if (ruta) {
-        resultDron.innerHTML = `<pre>Ruta óptima: ${ruta.join(' -> ')}\nConsumo total de batería: ${costo}</pre>`;
-    } else {
-        resultDron.innerHTML = "<pre>No se encontró una ruta válida.</pre>";
+    recargar() {
+        this.bateria = this.capacidadMaxima;
+    }
+
+    getBateria() {
+        return this.bateria;
     }
 }
 
-// Clase Grafo
 class Grafo {
     constructor() {
         this.nodos = new Set();
@@ -86,7 +88,6 @@ class Grafo {
     }
 }
 
-// Función para crear el grafo
 function crearGrafo() {
     const grafo = new Grafo();
     grafo.agregarNodo('A');
@@ -107,6 +108,3 @@ function crearGrafo() {
 
     return grafo;
 }
-
-// Vincular el botón "Ejecutar Dron" a la función
-document.getElementById('ejecutarDronBtn').addEventListener('click', ejecutarDron);
