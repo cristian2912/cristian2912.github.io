@@ -3,7 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optimizador de Conexiones</title>
+    <title>Optimizador de Conexiones y Drones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        section {
+            margin-bottom: 30px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
 </head>
 <body>
     <h1>Bienvenido a mi Página Web</h1>
@@ -14,13 +50,26 @@
         </ul>
     </nav>
 
-    <!-- Sección para el Optimizador de Conexiones -->
+    <!-- Sección para el Optimizador de Conexiones en Redes Sociales -->
     <section>
         <h2>Optimizador de Conexiones en Redes Sociales</h2>
-        <button onclick="main()">Ejecutar Dron</button>
+        <form id="pathForm">
+            <label for="startNode">Nodo de inicio:</label>
+            <input type="text" id="startNode" name="startNode" required>
+            <button type="submit">Calcular Caminos Más Cortos</button>
+        </form>
+        <div id="result"></div> <!-- Área para mostrar los resultados -->
+    </section>
+
+    <!-- Sección para el Dron -->
+    <section>
+        <h2>Planificación de Rutas para Drones</h2>
+        <button onclick="ejecutarDron()">Ejecutar Dron</button>
+        <div id="resultDron"></div> <!-- Área para mostrar los resultados del dron -->
     </section>
 
     <!-- Scripts -->
-    <script src="dron.js"></script>
+    <script type="module" src="./app.js"></script>
+    <script src="./dron.js"></script>
 </body>
 </html>
