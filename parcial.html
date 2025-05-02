@@ -348,7 +348,7 @@ CEO
         mostrarResult
 
 
-<!-- Ejercicio 5: Laberinto Interactivo -->
+<!-- Ejercicio 5: Laberinto Interactivo CORREGIDO -->
 <div class="ejercicio">
     <h2>Ejercicio 5: Laberinto Interactivo</h2>
     
@@ -381,14 +381,26 @@ CEO
 </div>
 
 <script>
-    // ===== EJERCICIO 5 =====
+    // ===== EJERCICIO 5 CORREGIDO =====
     class Laberinto {
         constructor() {
             this.grafo = {};
         }
 
         agregarCelda(celda, conexiones) {
-            this.grafo[celda] = conexiones.split(',').map(c => c.trim()).filter(c => c !== "");
+            // Convertir conexiones a array y limpiar espacios
+            const conexionesArray = conexiones.split(',')
+                .map(c => c.trim())
+                .filter(c => c !== "");
+            
+            // Verificar que la celda exista si se agregan conexiones
+            conexionesArray.forEach(conexion => {
+                if (!this.grafo[conexion]) {
+                    this.grafo[conexion] = [];
+                }
+            });
+            
+            this.grafo[celda] = conexionesArray;
             this.actualizarEstructura();
         }
 
@@ -396,24 +408,36 @@ CEO
             const visitado = new Set();
             const resultado = [];
             
-            function traverse(nodo) {
-                if (!visitado.has(nodo)) {
+            const traverse = (nodo) => {
+                if (!visitado.has(nodo) {
                     visitado.add(nodo);
                     resultado.push(nodo);
-                    const vecinos = this.grafo[nodo] || [];
-                    for (const vecino of vecinos) {
-                        traverse.call(this, vecino);
+                    
+                    // Asegurarse de que el nodo existe en el grafo
+                    if (this.grafo[nodo]) {
+                        this.grafo[nodo].forEach(vecino => {
+                            traverse(vecino);
+                        });
                     }
                 }
+            };
+            
+            if (this.grafo[inicio]) {
+                traverse(inicio);
+            } else {
+                alert("La celda inicial no existe en el laberinto");
             }
             
-            traverse.call(this, inicio);
             return resultado;
         }
 
         actualizarEstructura() {
             const pre = document.getElementById("estructuraLaberinto");
-            pre.textContent = JSON.stringify(this.grafo, null, 2);
+            let texto = "";
+            for (const celda in this.grafo) {
+                texto += `${celda} → ${this.grafo[celda].join(', ') || '(ninguna)'}\n`;
+            }
+            pre.textContent = texto || "(vacío)";
         }
     }
 
@@ -446,7 +470,7 @@ CEO
         }
     }
 
-    // Configuración inicial (equivalente al ejemplo Python)
+    // Configuración inicial opcional (puedes eliminarla si prefieres empezar vacío)
     laberinto.agregarCelda('A', 'B, C');
     laberinto.agregarCelda('B', 'D');
     laberinto.agregarCelda('C', 'E');
