@@ -184,3 +184,385 @@
     </script>
 </body>
 </html>
+
+<!-- Ejercicio 3: Agenda de Contactos -->
+<div class="ejercicio">
+    <h2>Ejercicio 3: Agenda de Contactos</h2>
+    
+    <!-- Agregar contacto -->
+    <div>
+        <input type="text" id="nombreContacto" placeholder="Nombre" style="margin-right: 10px;">
+        <input type="text" id="telefonoContacto" placeholder="Teléfono (ej: 555-1234)">
+        <button onclick="agregarContacto()" style="margin-top: 10px;">Agregar Contacto</button>
+    </div>
+    
+    <!-- Buscar contacto -->
+    <div style="margin-top: 15px;">
+        <input type="text" id="buscarContacto" placeholder="Nombre a buscar">
+        <button onclick="buscarContacto()">Buscar</button>
+        <p id="resultadoBusqueda"></p>
+    </div>
+    
+    <!-- Lista de contactos -->
+    <h3>Contactos:</h3>
+    <ul id="listaContactos"></ul>
+</div>
+
+<script>
+    // ===== EJERCICIO 3 =====
+    class Agenda {
+        constructor() {
+            this.contactos = {};
+        }
+
+        agregarContacto(nombre, telefono) {
+            this.contactos[nombre] = telefono;
+            this.actualizarListaContactos();
+        }
+
+        buscarContacto(nombre) {
+            return this.contactos[nombre] || "Contacto no encontrado.";
+        }
+
+        actualizarListaContactos() {
+            const lista = document.getElementById("listaContactos");
+            lista.innerHTML = "";
+            for (const [nombre, telefono] of Object.entries(this.contactos)) {
+                const li = document.createElement("li");
+                li.innerHTML = `<strong>${nombre}:</strong> ${telefono}`;
+                lista.appendChild(li);
+            }
+        }
+    }
+
+    const agenda = new Agenda();
+
+    function agregarContacto() {
+        const nombre = document.getElementById("nombreContacto").value.trim();
+        const telefono = document.getElementById("telefonoContacto").value.trim();
+        if (nombre && telefono) {
+            agenda.agregarContacto(nombre, telefono);
+            document.getElementById("nombreContacto").value = "";
+            document.getElementById("telefonoContacto").value = "";
+        }
+    }
+
+    function buscarContacto() {
+        const nombre = document.getElementById("buscarContacto").value.trim();
+        if (nombre) {
+            const resultado = agenda.buscarContacto(nombre);
+            document.getElementById("resultadoBusqueda").textContent = resultado;
+            document.getElementById("buscarContacto").value = "";
+        }
+    }
+</script>
+
+<!-- Ejercicio 4: Jerarquía de Empleados -->
+<div class="ejercicio">
+    <h2>Ejercicio 4: Jerarquía de Empleados</h2>
+    
+    <!-- Área para visualizar resultados -->
+    <div style="display: flex; gap: 20px; margin-top: 15px;">
+        <div>
+            <h3>Recorrido BFS (Anchura)</h3>
+            <button onclick="ejecutarBFS()">Ejecutar BFS</button>
+            <ul id="resultadoBFS"></ul>
+        </div>
+        <div>
+            <h3>Recorrido DFS (Profundidad)</h3>
+            <button onclick="ejecutarDFS()">Ejecutar DFS</button>
+            <ul id="resultadoDFS"></ul>
+        </div>
+    </div>
+
+    <!-- Visualización de árbol jerárquico -->
+    <div style="margin-top: 20px;">
+        <h3>Estructura Jerárquica:</h3>
+        <pre>
+CEO
+├── Gerente1
+└── Gerente2
+        </pre>
+    </div>
+</div>
+
+<script>
+    // ===== EJERCICIO 4 =====
+    class Empleado {
+        constructor(nombre) {
+            this.nombre = nombre;
+            this.izquierda = null;
+            this.derecha = null;
+        }
+    }
+
+    class Jerarquia {
+        bfs(root) {
+            const resultado = [];
+            if (!root) return resultado;
+            
+            const queue = [root];
+            while (queue.length > 0) {
+                const nodo = queue.shift();
+                resultado.push(nodo.nombre);
+                if (nodo.izquierda) queue.push(nodo.izquierda);
+                if (nodo.derecha) queue.push(nodo.derecha);
+            }
+            return resultado;
+        }
+
+        dfs(root) {
+            const resultado = [];
+            function traverse(node) {
+                if (node) {
+                    resultado.push(node.nombre);
+                    traverse(node.izquierda);
+                    traverse(node.derecha);
+                }
+            }
+            traverse(root);
+            return resultado;
+        }
+    }
+
+    // Crear estructura jerárquica (equivalente al ejemplo Python)
+    const ceo = new Empleado("CEO");
+    ceo.izquierda = new Empleado("Gerente1");
+    ceo.derecha = new Empleado("Gerente2");
+
+    const jerarquia = new Jerarquia();
+
+    // Funciones para los botones
+    function mostrarResultado(lista, elementoId) {
+        const ul = document.getElementById(elementoId);
+        ul.innerHTML = "";
+        lista.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            ul.appendChild(li);
+        });
+    }
+
+    function ejecutarBFS() {
+        const resultado = jerarquia.bfs(ceo);
+        mostrarResult
+
+    <!-- Ejercicio 5: Laberinto Interactivo -->
+<div class="ejercicio">
+    <h2>Ejercicio 5: Laberinto Interactivo</h2>
+    
+    <!-- Controles para construir el laberinto -->
+    <div style="margin-bottom: 20px;">
+        <h3>Configurar Laberinto</h3>
+        <input type="text" id="celdaActual" placeholder="Celda (ej: A)" style="margin-right: 10px;">
+        <input type="text" id="conexionesCelda" placeholder="Conexiones (ej: B,C)">
+        <button onclick="agregarCelda()">Agregar Celda</button>
+    </div>
+    
+    <!-- Selector para inicio del DFS -->
+    <div style="margin-bottom: 20px;">
+        <h3>Recorrido DFS</h3>
+        <input type="text" id="inicioDFS" placeholder="Celda inicial (ej: A)" style="margin-right: 10px;">
+        <button onclick="ejecutarDFS()">Iniciar DFS</button>
+    </div>
+    
+    <!-- Resultados -->
+    <div style="display: flex; gap: 30px;">
+        <div>
+            <h4>Estructura del Laberinto:</h4>
+            <pre id="estructuraLaberinto">(vacío)</pre>
+        </div>
+        <div>
+            <h4>Recorrido DFS:</h4>
+            <ul id="resultadoDFS"></ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ===== EJERCICIO 5 =====
+    class Laberinto {
+        constructor() {
+            this.grafo = {};
+        }
+
+        agregarCelda(celda, conexiones) {
+            this.grafo[celda] = conexiones.split(',').map(c => c.trim()).filter(c => c !== "");
+            this.actualizarEstructura();
+        }
+
+        dfs(inicio) {
+            const visitado = new Set();
+            const resultado = [];
+            
+            function traverse(nodo) {
+                if (!visitado.has(nodo)) {
+                    visitado.add(nodo);
+                    resultado.push(nodo);
+                    const vecinos = this.grafo[nodo] || [];
+                    for (const vecino of vecinos) {
+                        traverse.call(this, vecino);
+                    }
+                }
+            }
+            
+            traverse.call(this, inicio);
+            return resultado;
+        }
+
+        actualizarEstructura() {
+            const pre = document.getElementById("estructuraLaberinto");
+            pre.textContent = JSON.stringify(this.grafo, null, 2);
+        }
+    }
+
+    const laberinto = new Laberinto();
+
+    // Funciones para los botones
+    function agregarCelda() {
+        const celda = document.getElementById("celdaActual").value.trim();
+        const conexiones = document.getElementById("conexionesCelda").value.trim();
+        
+        if (celda) {
+            laberinto.agregarCelda(celda, conexiones);
+            document.getElementById("celdaActual").value = "";
+            document.getElementById("conexionesCelda").value = "";
+        }
+    }
+
+    function ejecutarDFS() {
+        const inicio = document.getElementById("inicioDFS").value.trim();
+        if (inicio) {
+            const resultado = laberinto.dfs(inicio);
+            const ul = document.getElementById("resultadoDFS");
+            ul.innerHTML = "";
+            
+            resultado.forEach(celda => {
+                const li = document.createElement("li");
+                li.textContent = celda;
+                ul.appendChild(li);
+            });
+        }
+    }
+
+    // Configuración inicial (equivalente al ejemplo Python)
+    laberinto.agregarCelda('A', 'B, C');
+    laberinto.agregarCelda('B', 'D');
+    laberinto.agregarCelda('C', 'E');
+    laberinto.agregarCelda('D', '');
+    laberinto.agregarCelda('E', '');
+</script>
+
+<!-- Ejercicio 6: Función de Deshacer -->
+<div class="ejercicio">
+    <h2>Ejercicio 6: Función de Deshacer</h2>
+    
+    <!-- Área para realizar acciones -->
+    <div style="margin-bottom: 20px;">
+        <h3>Realizar Acción</h3>
+        <input type="text" id="nuevaAccion" placeholder="Ej: Copiar, Pegar, etc." style="margin-right: 10px;">
+        <button onclick="realizarAccion()">Realizar</button>
+    </div>
+    
+    <!-- Área para deshacer -->
+    <div style="margin-bottom: 20px;">
+        <h3>Deshacer Acciones</h3>
+        <button onclick="deshacerAccion()">Deshacer Última Acción</button>
+        <p id="mensajeDeshacer" style="font-style: italic; color: #666;"></p>
+    </div>
+    
+    <!-- Historial de acciones -->
+    <div>
+        <h4>Historial de Acciones:</h4>
+        <ul id="historialAcciones"></ul>
+    </div>
+</div>
+
+<script>
+
+
+<!-- Ejercicio 6: Función de Deshacer -->
+<div class="ejercicio">
+    <h2>Ejercicio 6: Función de Deshacer</h2>
+    
+    <!-- Área para realizar acciones -->
+    <div style="margin-bottom: 20px;">
+        <h3>Realizar Acción</h3>
+        <input type="text" id="nuevaAccion" placeholder="Ej: Copiar, Pegar, etc." style="margin-right: 10px;">
+        <button onclick="realizarAccion()">Realizar</button>
+    </div>
+    
+    <!-- Área para deshacer -->
+    <div style="margin-bottom: 20px;">
+        <h3>Deshacer Acciones</h3>
+        <button onclick="deshacerAccion()">Deshacer Última Acción</button>
+        <p id="mensajeDeshacer" style="font-style: italic; color: #666;"></p>
+    </div>
+    
+    <!-- Historial de acciones -->
+    <div>
+        <h4>Historial de Acciones:</h4>
+        <ul id="historialAcciones"></ul>
+    </div>
+</div>
+
+<script>
+    // ===== EJERCICIO 6 =====
+    class HistorialAcciones {
+        constructor() {
+            this.stack = [];
+        }
+
+        realizarAccion(accion) {
+            this.stack.push(accion);
+            this.actualizarHistorial();
+            document.getElementById("mensajeDeshacer").textContent = `Acción realizada: ${accion}`;
+            document.getElementById("mensajeDeshacer").style.color = "green";
+        }
+
+        deshacerAccion() {
+            if (this.stack.length > 0) {
+                const accion = this.stack.pop();
+                this.actualizarHistorial();
+                document.getElementById("mensajeDeshacer").textContent = `Acción deshecha: ${accion}`;
+                document.getElementById("mensajeDeshacer").style.color = "red";
+            } else {
+                document.getElementById("mensajeDeshacer").textContent = "No hay acciones para deshacer.";
+                document.getElementById("mensajeDeshacer").style.color = "#666";
+            }
+        }
+
+        actualizarHistorial() {
+            const ul = document.getElementById("historialAcciones");
+            ul.innerHTML = "";
+            this.stack.forEach((accion, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${index + 1}. ${accion}`;
+                ul.appendChild(li);
+            });
+        }
+    }
+
+    const historial = new HistorialAcciones();
+
+    // Funciones para los botones
+    function realizarAccion() {
+        const accion = document.getElementById("nuevaAccion").value.trim();
+        if (accion) {
+            historial.realizarAccion(accion);
+            document.getElementById("nuevaAccion").value = "";
+        }
+    }
+
+    function deshacerAccion() {
+        historial.deshacerAccion();
+    }
+
+    // Ejemplo de prueba (opcional)
+    historial.realizarAccion("Escribir");
+    historial.realizarAccion("Borrar");
+</script>
+
+
+
+    
