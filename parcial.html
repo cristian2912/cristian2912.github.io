@@ -1,0 +1,82 @@
+<div class="ejercicio">
+    <h2>Ejercicio 1: Carrito de Compras</h2>
+    
+    <!-- Entrada para agregar productos -->
+    <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+    <button onclick="agregarProducto()">Agregar al carrito</button>
+    
+    <!-- Lista de productos en el carrito -->
+    <h3>Productos en el carrito:</h3>
+    <ul id="listaProductos"></ul>
+    
+    <!-- Eliminar producto -->
+    <input type="text" id="productoAEliminar" placeholder="Nombre del producto a eliminar">
+    <button onclick="eliminarProducto()">Eliminar del carrito</button>
+    
+    <!-- Mensajes de error/éxito -->
+    <p id="mensaje" style="color: red;"></p>
+</div>
+
+<script>
+    // Clase Producto (equivalente a la clase Python)
+    class Producto {
+        constructor(nombre) {
+            this.nombre = nombre;
+        }
+    }
+
+    // Clase Carrito (equivalente a la clase Python)
+    class Carrito {
+        constructor() {
+            this.productos = [];
+        }
+
+        agregarProducto(producto) {
+            this.productos.push(producto);
+            this.actualizarLista();
+        }
+
+        eliminarProducto(nombreProducto) {
+            const inicialLength = this.productos.length;
+            this.productos = this.productos.filter(p => p.nombre !== nombreProducto);
+            
+            if (this.productos.length === inicialLength) {
+                document.getElementById("mensaje").textContent = `Producto "${nombreProducto}" no está en el carrito.`;
+            } else {
+                document.getElementById("mensaje").textContent = "";
+            }
+            this.actualizarLista();
+        }
+
+        actualizarLista() {
+            const lista = document.getElementById("listaProductos");
+            lista.innerHTML = "";
+            this.productos.forEach(producto => {
+                const li = document.createElement("li");
+                li.textContent = producto.nombre;
+                lista.appendChild(li);
+            });
+        }
+    }
+
+    // Instancia global del carrito
+    const carrito = new Carrito();
+
+    // Funciones para los botones
+    function agregarProducto() {
+        const nombre = document.getElementById("nombreProducto").value.trim();
+        if (nombre) {
+            const producto = new Producto(nombre);
+            carrito.agregarProducto(producto);
+            document.getElementById("nombreProducto").value = ""; // Limpiar input
+        }
+    }
+
+    function eliminarProducto() {
+        const nombre = document.getElementById("productoAEliminar").value.trim();
+        if (nombre) {
+            carrito.eliminarProducto(nombre);
+            document.getElementById("productoAEliminar").value = ""; // Limpiar input
+        }
+    }
+</script>
