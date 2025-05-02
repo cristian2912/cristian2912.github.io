@@ -347,7 +347,8 @@ CEO
         const resultado = jerarquia.bfs(ceo);
         mostrarResult
 
-    <!-- Ejercicio 5: Laberinto Interactivo -->
+
+<!-- Ejercicio 5: Laberinto Interactivo -->
 <div class="ejercicio">
     <h2>Ejercicio 5: Laberinto Interactivo</h2>
     
@@ -452,6 +453,7 @@ CEO
     laberinto.agregarCelda('D', '');
     laberinto.agregarCelda('E', '');
 </script>
+
 
 <!-- Ejercicio 6: Función de Deshacer -->
 <div class="ejercicio">
@@ -564,5 +566,424 @@ CEO
 </script>
 
 
+<!-- Ejercicio 7: Atención por Turnos -->
+<div class="ejercicio">
+    <h2>Ejercicio 7: Atención por Turnos</h2>
+    
+    <!-- Agregar persona a la cola -->
+    <div style="margin-bottom: 20px;">
+        <h3>Agregar Persona</h3>
+        <input type="text" id="nombrePersona" placeholder="Ej: Ana, Luis, etc." style="margin-right: 10px;">
+        <button onclick="agregarTurno()">Tomar Turno</button>
+    </div>
+    
+    <!-- Atender siguiente turno -->
+    <div style="margin-bottom: 20px;">
+        <h3>Atender Turno</h3>
+        <button onclick="atenderTurno()">Atender Siguiente</button>
+        <p id="mensajeTurno" style="font-style: italic;"></p>
+    </div>
+    
+    <!-- Cola actual -->
+    <div>
+        <h4>Cola de Espera:</h4>
+        <ol id="colaTurnos"></ol>
+    </div>
+</div>
 
+<script>
+    // ===== EJERCICIO 7 =====
+    class Turnos {
+        constructor() {
+            this.cola = [];
+        }
+
+        agregarTurno(persona) {
+            this.cola.push(persona);
+            this.actualizarCola();
+            document.getElementById("mensajeTurno").textContent = `${persona} ha tomado turno.`;
+            document.getElementById("mensajeTurno").style.color = "green";
+        }
+
+        atenderTurno() {
+            if (this.cola.length > 0) {
+                const persona = this.cola.shift();
+                this.actualizarCola();
+                document.getElementById("mensajeTurno").textContent = `Atendiendo a: ${persona}`;
+                document.getElementById("mensajeTurno").style.color = "blue";
+            } else {
+                document.getElementById("mensajeTurno").textContent = "No hay personas en la cola.";
+                document.getElementById("mensajeTurno").style.color = "red";
+            }
+        }
+
+        actualizarCola() {
+            const ol = document.getElementById("colaTurnos");
+            ol.innerHTML = "";
+            this.cola.forEach((persona, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${index + 1}. ${persona}`;
+                ol.appendChild(li);
+            });
+        }
+    }
+
+    const turnos = new Turnos();
+
+    // Funciones para los botones
+    function agregarTurno() {
+        const persona = document.getElementById("nombrePersona").value.trim();
+        if (persona) {
+            turnos.agregarTurno(persona);
+            document.getElementById("nombrePersona").value = "";
+        }
+    }
+
+    function atenderTurno() {
+        turnos.atenderTurno();
+    }
+
+    // Ejemplo de prueba (opcional)
+    turnos.agregarTurno("Ana");
+    turnos.agregarTurno("Luis");
+</script>
+
+
+<!-- Ejercicio 8: Búsqueda en Base de Datos -->
+<div class="ejercicio">
+    <h2>Ejercicio 8: Búsqueda en Base de Datos</h2>
+    
+    <!-- Insertar valores -->
+    <div style="margin-bottom: 20px;">
+        <h3>Insertar Valor</h3>
+        <input type="number" id="valorInsertar" placeholder="Ej: 10, 5, 15" style="margin-right: 10px;">
+        <button onclick="insertarValor()">Insertar</button>
+    </div>
+    
+    <!-- Buscar valores -->
+    <div style="margin-bottom: 20px;">
+        <h3>Buscar Valor</h3>
+        <input type="number" id="valorBuscar" placeholder="Ej: 5, 12" style="margin-right: 10px;">
+        <button onclick="buscarValor()">Buscar</button>
+        <p id="resultadoBusqueda" style="font-weight: bold; margin-top: 10px;"></p>
+    </div>
+    
+    <!-- Visualización del árbol -->
+    <div>
+        <h4>Árbol Actual:</h4>
+        <pre id="visualizacionArbol"></pre>
+    </div>
+</div>
+
+<script>
+    // ===== EJERCICIO 8 =====
+    class Nodo {
+        constructor(valor) {
+            this.valor = valor;
+            this.izquierda = null;
+            this.derecha = null;
+        }
+    }
+
+    class ArbolBusqueda {
+        constructor() {
+            this.raiz = null;
+        }
+
+        insertar(valor) {
+            if (!this.raiz) {
+                this.raiz = new Nodo(valor);
+            } else {
+                this._insertarRec(this.raiz, valor);
+            }
+            this.actualizarArbol();
+        }
+
+        _insertarRec(actual, valor) {
+            if (valor < actual.valor) {
+                if (actual.izquierda) {
+                    this._insertarRec(actual.izquierda, valor);
+                } else {
+                    actual.izquierda = new Nodo(valor);
+                }
+            } else {
+                if (actual.derecha) {
+                    this._insertarRec(actual.derecha, valor);
+                } else {
+                    actual.derecha = new Nodo(valor);
+                }
+            }
+        }
+
+        buscar(valor) {
+            return this._buscarRec(this.raiz, valor);
+        }
+
+        _buscarRec(actual, valor) {
+            if (!actual) return false;
+            if (actual.valor === valor) return true;
+            return valor < actual.valor 
+                ? this._buscarRec(actual.izquierda, valor) 
+                : this._buscarRec(actual.derecha, valor);
+        }
+
+        actualizarArbol() {
+            const pre = document.getElementById("visualizacionArbol");
+            pre.textContent = this.dibujarArbol(this.raiz);
+        }
+
+        dibujarArbol(nodo, prefijo = "", esIzquierdo = true) {
+            if (!nodo) return "";
+            let str = "";
+            const nuevoPrefijo = prefijo + (esIzquierdo ? "│   " : "    ");
+            str += this.dibujarArbol(nodo.derecha, nuevoPrefijo, false);
+            str += prefijo + (esIzquierdo ? "└── " : "┌── ") + nodo.valor + "\n";
+            str += this.dibujarArbol(nodo.izquierda, nuevoPrefijo, true);
+            return str;
+        }
+    }
+
+    const arbol = new ArbolBusqueda();
+
+    // Funciones para los botones
+    function insertarValor() {
+        const valor = parseInt(document.getElementById("valorInsertar").value);
+        if (!isNaN(valor)) {
+            arbol.insertar(valor);
+            document.getElementById("valorInsertar").value = "";
+        }
+    }
+
+    function buscarValor() {
+        const valor = parseInt(document.getElementById("valorBuscar").value);
+        if (!isNaN(valor)) {
+            const encontrado = arbol.buscar(valor);
+            const resultado = document.getElementById("resultadoBusqueda");
+            resultado.textContent = encontrado 
+                ? `Valor ${valor} encontrado ✅` 
+                : `Valor ${valor} no encontrado ❌`;
+            resultado.style.color = encontrado ? "green" : "red";
+        }
+    }
+
+    // Ejemplo de prueba (opcional)
+    arbol.insertar(10);
+    arbol.insertar(5);
+    arbol.insertar(15);
+</script>
+
+<!-- Ejercicio 9: Cálculo de Profundidad de Árbol -->
+<div class="ejercicio">
+    <h2>Ejercicio 9: Cálculo de Profundidad de Árbol</h2>
+    
+    <!-- Constructor de árbol interactivo -->
+    <div style="margin-bottom: 20px;">
+        <h3>Construir Árbol</h3>
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <input type="number" id="valorNodo" placeholder="Valor del nodo" style="flex: 1;">
+            <select id="posicionNodo" style="flex: 1;">
+                <option value="raiz">Raíz</option>
+                <option value="izquierda">Hijo izquierdo</option>
+                <option value="derecha">Hijo derecho</option>
+            </select>
+            <button onclick="agregarNodo()">Agregar Nodo</button>
+        </div>
+        <button onclick="calcularProfundidad()" style="background-color: #28a745;">Calcular Profundidad</button>
+    </div>
+    
+    <!-- Resultados y visualización -->
+    <div style="display: flex; gap: 30px;">
+        <div>
+            <h4>Profundidad del Árbol:</h4>
+            <p id="resultadoProfundidad" style="font-size: 24px; font-weight: bold;">0</p>
+        </div>
+        <div>
+            <h4>Estructura del Árbol:</h4>
+            <pre id="visualizacionArbolProfundidad">(vacío)</pre>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ===== EJERCICIO 9 =====
+    class NodoProfundidad {
+        constructor(valor) {
+            this.valor = valor;
+            this.izquierda = null;
+            this.derecha = null;
+        }
+    }
+
+    // Árbol global
+    let raiz = null;
+
+    function profundidad(nodo) {
+        if (!nodo) return 0;
+        return 1 + Math.max(profundidad(nodo.izquierda), profundidad(nodo.derecha));
+    }
+
+    function agregarNodo() {
+        const valor = parseInt(document.getElementById("valorNodo").value);
+        const posicion = document.getElementById("posicionNodo").value;
+        
+        if (isNaN(valor)) return;
+        
+        const nuevoNodo = new NodoProfundidad(valor);
+        
+        if (posicion === "raiz") {
+            raiz = nuevoNodo;
+        } else if (raiz) {
+            if (posicion === "izquierda" && !raiz.izquierda) {
+                raiz.izquierda = nuevoNodo;
+            } else if (posicion === "derecha" && !raiz.derecha) {
+                raiz.derecha = nuevoNodo;
+            } else {
+                alert("¡Posición no disponible o raíz no definida!");
+                return;
+            }
+        } else {
+            alert("¡Primero debe definir la raíz!");
+            return;
+        }
+        
+        actualizarVisualizacion();
+        document.getElementById("valorNodo").value = "";
+    }
+
+    function calcularProfundidad() {
+        const resultado = profundidad(raiz);
+        document.getElementById("resultadoProfundidad").textContent = resultado;
+    }
+
+    function actualizarVisualizacion() {
+        const pre = document.getElementById("visualizacionArbolProfundidad");
+        pre.textContent = dibujarArbol(raiz);
+    }
+
+    function dibujarArbol(nodo, prefijo = "", esIzquierdo = true) {
+        if (!nodo) return "";
+        let str = "";
+        const nuevoPrefijo = prefijo + (esIzquierdo ? "│   " : "    ");
+        str += dibujarArbol(nodo.derecha, nuevoPrefijo, false);
+        str += prefijo + (esIzquierdo ? "└── " : "┌── ") + nodo.valor + "\n";
+        str += dibujarArbol(nodo.izquierda, nuevoPrefijo, true);
+        return str;
+    }
+
+    // Ejemplo precargado (opcional)
+    raiz = new NodoProfundidad(1);
+    raiz.izquierda = new NodoProfundidad(2);
+    raiz.derecha = new NodoProfundidad(3);
+    raiz.izquierda.izquierda = new NodoProfundidad(4);
+    actualizarVisualizacion();
+</script>
+
+<!-- Ejercicio 10: Ciclos en Dependencias -->
+<div class="ejercicio">
+    <h2>Ejercicio 10: Ciclos en Dependencias</h2>
+    
+    <!-- Constructor de grafo -->
+    <div style="margin-bottom: 20px;">
+        <h3>Agregar Dependencia</h3>
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <input type="number" id="nodoOrigen" placeholder="Nodo origen" style="width: 100px;">
+            <span>→</span>
+            <input type="number" id="nodoDestino" placeholder="Nodo destino" style="width: 100px;">
+            <button onclick="agregarArista()">Agregar</button>
+        </div>
+    </div>
+    
+    <!-- Detección de ciclos -->
+    <div style="margin-bottom: 20px;">
+        <h3>Detección de Ciclos</h3>
+        <button onclick="detectarCiclo()" style="background-color: #dc3545; color: white;">Verificar Ciclos</button>
+        <p id="resultadoCiclo" style="font-weight: bold; margin-top: 10px;"></p>
+    </div>
+    
+    <!-- Visualización del grafo -->
+    <div>
+        <h4>Grafo Actual:</h4>
+        <pre id="visualizacionGrafo"></pre>
+    </div>
+</div>
+
+<script>
+    // ===== EJERCICIO 10 =====
+    class GrafoCiclos {
+        constructor() {
+            this.grafo = {};
+        }
+
+        agregarArista(u, v) {
+            if (!this.grafo[u]) {
+                this.grafo[u] = [];
+            }
+            this.grafo[u].push(v);
+            this.actualizarVisualizacion();
+        }
+
+        detectarCiclo() {
+            const visitado = new Set();
+            const recursion = new Set();
+
+            const dfs = (v) => {
+                visitado.add(v);
+                recursion.add(v);
+
+                for (const vecino of this.grafo[v] || []) {
+                    if (!visitado.has(vecino)) {
+                        if (dfs(vecino)) return true;
+                    } else if (recursion.has(vecino)) {
+                        return true;
+                    }
+                }
+
+                recursion.delete(v);
+                return false;
+            };
+
+            for (const nodo of Object.keys(this.grafo)) {
+                const nodoNum = parseInt(nodo);
+                if (!visitado.has(nodoNum)) {
+                    if (dfs(nodoNum)) return true;
+                }
+            }
+            return false;
+        }
+
+        actualizarVisualizacion() {
+            const pre = document.getElementById("visualizacionGrafo");
+            let texto = "";
+            for (const [u, vecinos] of Object.entries(this.grafo)) {
+                texto += `${u} → ${vecinos.join(", ")}\n`;
+            }
+            pre.textContent = texto || "(vacío)";
+        }
+    }
+
+    const grafo = new GrafoCiclos();
+
+    function agregarArista() {
+        const u = parseInt(document.getElementById("nodoOrigen").value);
+        const v = parseInt(document.getElementById("nodoDestino").value);
+        
+        if (!isNaN(u) && !isNaN(v)) {
+            grafo.agregarArista(u, v);
+            document.getElementById("nodoOrigen").value = "";
+            document.getElementById("nodoDestino").value = "";
+        }
+    }
+
+    function detectarCiclo() {
+        const tieneCiclo = grafo.detectarCiclo();
+        const resultado = document.getElementById("resultadoCiclo");
+        resultado.textContent = tieneCiclo ? "¡Hay ciclos! 🔄" : "No hay ciclos ✅";
+        resultado.style.color = tieneCiclo ? "red" : "green";
+    }
+
+    // Ejemplo precargado (opcional)
+    grafo.agregarArista(0, 1);
+    grafo.agregarArista(1, 2);
+    grafo.agregarArista(2, 0);
+</script>
     
