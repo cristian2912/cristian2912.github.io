@@ -1,82 +1,186 @@
-<div class="ejercicio">
-    <h2>Ejercicio 1: Carrito de Compras</h2>
-    
-    <!-- Entrada para agregar productos -->
-    <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-    <button onclick="agregarProducto()">Agregar al carrito</button>
-    
-    <!-- Lista de productos en el carrito -->
-    <h3>Productos en el carrito:</h3>
-    <ul id="listaProductos"></ul>
-    
-    <!-- Eliminar producto -->
-    <input type="text" id="productoAEliminar" placeholder="Nombre del producto a eliminar">
-    <button onclick="eliminarProducto()">Eliminar del carrito</button>
-    
-    <!-- Mensajes de error/éxito -->
-    <p id="mensaje" style="color: red;"></p>
-</div>
-
-<script>
-    // Clase Producto (equivalente a la clase Python)
-    class Producto {
-        constructor(nombre) {
-            this.nombre = nombre;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Parcial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
         }
-    }
-
-    // Clase Carrito (equivalente a la clase Python)
-    class Carrito {
-        constructor() {
-            this.productos = [];
+        h1, h2 {
+            color: #333;
         }
-
-        agregarProducto(producto) {
-            this.productos.push(producto);
-            this.actualizarLista();
+        .ejercicio {
+            margin-bottom: 40px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
         }
+        button {
+            padding: 8px 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input, select {
+            padding: 5px;
+            margin: 5px 0;
+            width: 200px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+        }
+        p[id^="mensaje"] {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Ejercicios del Parcial</h1>
 
-        eliminarProducto(nombreProducto) {
-            const inicialLength = this.productos.length;
-            this.productos = this.productos.filter(p => p.nombre !== nombreProducto);
-            
-            if (this.productos.length === inicialLength) {
-                document.getElementById("mensaje").textContent = `Producto "${nombreProducto}" no está en el carrito.`;
-            } else {
-                document.getElementById("mensaje").textContent = "";
+    <!-- Ejercicio 1: Carrito de Compras -->
+    <div class="ejercicio">
+        <h2>Ejercicio 1: Carrito de Compras</h2>
+        
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+        <button onclick="agregarProducto()">Agregar al carrito</button>
+        
+        <h3>Productos en el carrito:</h3>
+        <ul id="listaProductos"></ul>
+        
+        <input type="text" id="productoAEliminar" placeholder="Nombre del producto a eliminar">
+        <button onclick="eliminarProducto()">Eliminar del carrito</button>
+        
+        <p id="mensajeCarrito" style="color: red;"></p>
+    </div>
+
+    <!-- Ejercicio 2: Registro de Correos Únicos -->
+    <div class="ejercicio">
+        <h2>Ejercicio 2: Registro de Correos Únicos</h2>
+        
+        <input type="email" id="nuevoCorreo" placeholder="ejemplo@gmail.com">
+        <button onclick="agregarCorreo()">Registrar Correo</button>
+        
+        <h3>Correos registrados:</h3>
+        <ul id="listaCorreos"></ul>
+        
+        <p id="mensajeCorreo" style="color: red;"></p>
+    </div>
+
+    <script>
+        // ===== EJERCICIO 1 =====
+        class Producto {
+            constructor(nombre) {
+                this.nombre = nombre;
             }
-            this.actualizarLista();
         }
 
-        actualizarLista() {
-            const lista = document.getElementById("listaProductos");
-            lista.innerHTML = "";
-            this.productos.forEach(producto => {
-                const li = document.createElement("li");
-                li.textContent = producto.nombre;
-                lista.appendChild(li);
-            });
-        }
-    }
+        class Carrito {
+            constructor() {
+                this.productos = [];
+            }
 
-    // Instancia global del carrito
-    const carrito = new Carrito();
+            agregarProducto(producto) {
+                this.productos.push(producto);
+                this.actualizarLista();
+            }
 
-    // Funciones para los botones
-    function agregarProducto() {
-        const nombre = document.getElementById("nombreProducto").value.trim();
-        if (nombre) {
-            const producto = new Producto(nombre);
-            carrito.agregarProducto(producto);
-            document.getElementById("nombreProducto").value = ""; // Limpiar input
-        }
-    }
+            eliminarProducto(nombreProducto) {
+                const inicialLength = this.productos.length;
+                this.productos = this.productos.filter(p => p.nombre !== nombreProducto);
+                
+                if (this.productos.length === inicialLength) {
+                    document.getElementById("mensajeCarrito").textContent = `Producto "${nombreProducto}" no está en el carrito.`;
+                } else {
+                    document.getElementById("mensajeCarrito").textContent = "";
+                }
+                this.actualizarLista();
+            }
 
-    function eliminarProducto() {
-        const nombre = document.getElementById("productoAEliminar").value.trim();
-        if (nombre) {
-            carrito.eliminarProducto(nombre);
-            document.getElementById("productoAEliminar").value = ""; // Limpiar input
+            actualizarLista() {
+                const lista = document.getElementById("listaProductos");
+                lista.innerHTML = "";
+                this.productos.forEach(producto => {
+                    const li = document.createElement("li");
+                    li.textContent = producto.nombre;
+                    lista.appendChild(li);
+                });
+            }
         }
-    }
-</script>
+
+        const carrito = new Carrito();
+
+        function agregarProducto() {
+            const nombre = document.getElementById("nombreProducto").value.trim();
+            if (nombre) {
+                const producto = new Producto(nombre);
+                carrito.agregarProducto(producto);
+                document.getElementById("nombreProducto").value = "";
+            }
+        }
+
+        function eliminarProducto() {
+            const nombre = document.getElementById("productoAEliminar").value.trim();
+            if (nombre) {
+                carrito.eliminarProducto(nombre);
+                document.getElementById("productoAEliminar").value = "";
+            }
+        }
+
+        // ===== EJERCICIO 2 =====
+        class RegistroCorreo {
+            constructor() {
+                this.correos = new Set();
+            }
+
+            agregarCorreo(correo) {
+                if (this.correos.has(correo)) {
+                    document.getElementById("mensajeCorreo").textContent = `Correo ${correo} ya registrado.`;
+                    return false;
+                } else {
+                    this.correos.add(correo);
+                    document.getElementById("mensajeCorreo").textContent = `Correo ${correo} agregado.`;
+                    this.actualizarListaCorreos();
+                    return true;
+                }
+            }
+
+            actualizarListaCorreos() {
+                const lista = document.getElementById("listaCorreos");
+                lista.innerHTML = "";
+                this.correos.forEach(correo => {
+                    const li = document.createElement("li");
+                    li.textContent = correo;
+                    lista.appendChild(li);
+                });
+            }
+        }
+
+        const registroCorreo = new RegistroCorreo();
+
+        function agregarCorreo() {
+            const correo = document.getElementById("nuevoCorreo").value.trim();
+            if (correo) {
+                registroCorreo.agregarCorreo(correo);
+                document.getElementById("nuevoCorreo").value = "";
+            }
+        }
+    </script>
+</body>
+</html>
