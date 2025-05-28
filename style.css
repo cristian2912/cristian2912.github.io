@@ -73,3 +73,90 @@ button:hover {
     background-color: #f4f4f4;
     border-radius: 5px;
 }
+
+/* ==================== */
+/* Validador de Contraseñas */
+/* ==================== */
+
+.password-validator {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.password-container {
+    display: flex;
+    margin: 20px 0;
+}
+
+.password-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.password-container button {
+    padding: 10px 20px;
+    border-radius: 0 4px 4px 0;
+    font-size: 16px;
+}
+
+#passwordResult {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+    display: none;
+}
+
+.password-valid {
+    background-color: #d4edda;
+    color: #155724;
+    display: block !important;
+}
+
+.password-invalid {
+    background-color: #f8d7da;
+    color: #721c24;
+    display: block !important;
+}
+
+.password-rules {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.password-rules ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.password-rules li {
+    margin-bottom: 8px;
+    color: #6c757d;
+}
+
+.rule-valid {
+    color: #28a745 !important;
+    font-weight: bold;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
