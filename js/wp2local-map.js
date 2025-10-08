@@ -1,0 +1,2 @@
+window.__LOCAL_IMAGES__ = Object.assign({}, window.__LOCAL_IMAGES__||{}, {"grupo-6-1": "grupo-6-1-980x980.jpg", "masajefacia_l-1": "masajefacia_l-1-980x980.jpg", "gluteos3-1": "gluteos3-1.jpg"});
+window.__LOCAL_IMAGES__ = Object.assign({}, window.__LOCAL_IMAGES__||{}, {"health-clinic-icon-orange-1-1": "Health-Clinic-icon-orange-1-1.png", "health-clinic-icon-orange-3-1": "Health-Clinic-icon-orange-3-1.png", "health-clinic-icon-orange-4-1": "Health-Clinic-icon-orange-4-1.png"});
