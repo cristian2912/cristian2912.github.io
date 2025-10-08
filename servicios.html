@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios | CECI MOR</title>
+
+  <!-- Site-wide CSS -->
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/divi-style.css">
+  <link rel="stylesheet" href="css/divi-dynamic.css">
+  <link rel="stylesheet" href="css/fonts-fixed.css">
+  <link rel="stylesheet" href="css/fonts-override.css">
+  <link rel="stylesheet" href="css/overrides.css">
+  <!-- Page-specific CSS (34) -->
+  <link rel="stylesheet" href="css/et-core-unified-34.css">
+  <link rel="stylesheet" href="css/et-divi-dynamic-34.css">
+  <link rel="stylesheet" href="css/et-divi-dynamic-34-late.css">>
+
+  <!-- Google Fonts substitute if needed -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Prata&display=swap" rel="stylesheet">
+  <style>
+    /* Fallbacks menores para asegurar estructura en local */
+    body { font-family: 'Open Sans', Arial, sans-serif; color:#666; }
+    .container { width:80%; max-width:1080px; margin:auto; position:relative; }
+    #main-header { background:#fff; box-shadow:0 1px 0 rgba(0,0,0,.1); position:relative; z-index: 9999; }
+    #top-header { background-color:#b1a066; color:#fff; font-size:12px; }
+    #et-info a, #et-info { color:#fff; }
+    #logo { max-height:54%; }
+    .et_search_outer{display:none;} /* Buscador oculto en clon estático */
+    /* Asegurar paddings secciones */
+    .et_pb_section{padding:54px 0;}
+    @media (max-width:980px){ .et_pb_section{padding:30px 0;} }
+  </style>
+
+<style id="servicios-fixes-v4">
+/* 1. Centrado de hero y sin imagen de fondo */
+.et_pb_section_0{ background-color:#f5ede7 !important; background-image:none !important; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+.et_pb_row_0, .et_pb_image_1, .et_pb_text_0{ margin-left:auto !important; margin-right:auto !important; text-align:center !important; }
+.et_pb_image_1 img{ display:block; height:auto; max-width:100%; margin:10px auto; }
+
+/* 5. Texto negro en la seccion final */
+.et_pb_section_2, .et_pb_section_2 *{ color:#000 !important; }
+.et_pb_section_2 a{ color:#000 !important; text-decoration:none; }
+
+/* 7. Mostrar el buscador del menú */
+#et_top_search{ display:block !important; }
+.et_search_outer{ display:block !important; }
+#et_search_icon{ cursor:pointer; }
+
+/* 8. Sin scroll horizontal */
+html, body{ overflow-x:hidden; }
+img{ max-width:100%; height:auto; }
+
+/* 9. Iconos en top bar (fallback si la fuente de iconos no carga) */
+#et-info-phone:before{ content:'📞'; margin-right:8px; }
+#et-info-email:before{ content:'✉️'; margin-right:8px; }
+
+/* 6. Colores de redes estilo marcas para el bloque del footer */
+.et-social-icons .et-social-facebook a.icon{ background:#3b5998 !important; color:#fff !important; }
+.et-social-icons .et-social-instagram a.icon{ background:#E4405F !important; color:#fff !important; }
+.et-social-icons .et-social-tiktok a.icon{ background:#000000 !important; color:#fff !important; }
+.et-social-icons li a.icon{ border-radius:50%; width:36px; height:36px; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; }
+</style>
+
+
+<!-- Cargar las fuentes de iconos -->
+<link rel="stylesheet" href="css/fonts-fixed.css">
+<link rel="stylesheet" href="css/fonts-override.css">
+
+
+<style id="icons-correct">
+#et-info-phone:before{content:"\e090";font-family:"ETmodules";position:relative;top:2px;margin-right:2px;font-style:normal;font-weight:normal;speak:none;}
+#et-info-email:before{content:"\e076";font-family:"ETmodules";margin-right:4px;font-style:normal;font-weight:normal;speak:none;}
+#et_search_icon:before{content:"\55";font-family:"ETmodules";font-style:normal;font-weight:normal;}
+</style>
+
+<style id="scroll-sticky-fix">
+html,body{margin:0; padding:0; height:auto; overflow-x:hidden;}
+#page-container{overflow-x:hidden;}
+.et_pb_section{margin-bottom:0;}
+.et_pb_row{margin-bottom:0;}
+.et_pb_section:last-of-type{padding-bottom:40px;}
+.et_search_outer{display:none !important;}
+#top-header{line-height:26px; padding:4px 0;}
+#main-header{position:sticky; top:0; z-index:10000; background:#fff;}
+#main-header .container, #et-top-navigation{height:60px;}
+#et-top-navigation nav > ul > li > a{line-height:60px;}
+#logo{max-height:48px;}
+@media (max-width:980px){
+  #main-header .container, #et-top-navigation{height:54px;}
+  #et-top-navigation nav > ul > li > a{line-height:54px;}
+  #logo{max-height:42px;}
+}
+.et_pb_section_2{margin-bottom:0 !important; padding-bottom:40px;}
+</style>
+
+
+<style id="definitive-scroll-fix">
+/* neutralize hidden overlays contributing height */
+.et_search_outer,
+.et_slide_in_menu_container {display:none!important;height:0!important;overflow:hidden!important;}
+
+/* remove spacing at top and bottom */
+#main-content{margin:0!important;padding:0!important;}
+.et_pb_section_0{margin-top:0!important;padding-top:0!important;}
+.et_pb_section:last-child,
+.et-l--footer .et_pb_section:last-child{margin-bottom:0!important;padding-bottom:0!important;}
+
+/* compact sticky header */
+#top-header{padding:2px 0!important;line-height:24px!important;}
+#main-header{position:sticky;top:0;z-index:10000;background:#fff;}
+#main-header .et_menu_container{padding:0!important;}
+#main-header .container, #et-top-navigation{height:56px!important;}
+#et-top-navigation nav > ul > li > a{line-height:56px!important;}
+#logo{max-height:44px!important;}
+
+/* prevent horizontal scroll and min-heights */
+html,body,#page-container{margin:0!important;padding:0!important;min-height:0!important;overflow-x:hidden;}
+</style>
+
+
+<style id="menu-vertical-center-fix">
+#main-header .container, #et-top-navigation{height:56px !important; display:flex; align-items:center;}
+#top-menu-nav{height:56px !important; display:flex; align-items:center;}
+#top-menu-nav > ul > li > a{line-height:56px !important; padding-top:0 !important; padding-bottom:0 !important;}
+#et_top_search{height:56px !important; display:flex; align-items:center;}
+.logo_container{display:flex; align-items:center;}
+</style>
+<style id="fix-menu-center">
+/* Altura objetivo del header */
+:root{ --menu-h: 60px; }
+
+/* Quita el padding-top de Divi que baja el menú */
+#et-top-navigation{ padding-top:0 !important; padding-bottom:0 !important; height:var(--menu-h) !important; }
+
+/* Contenedor alineado al centro */
+#main-header .container{ height:var(--menu-h) !important; padding:0 !important; display:flex; align-items:center; }
+
+/* Nav centrado vertical y sin márgenes extra */
+#top-menu-nav{ height:var(--menu-h) !important; display:flex; align-items:center; margin:0 !important; }
+#top-menu{ margin:0 !important; }
+#top-menu > li{ margin:0 !important; padding:0 !important; }
+
+/* Enlaces al centro vertical */
+#top-menu > li > a{
+  line-height:var(--menu-h) !important;
+  padding-top:0 !important; padding-bottom:0 !important;
+  display:flex !important; align-items:center !important;
+}
+
+/* Lupa alineada al centro */
+#et_top_search{ height:var(--menu-h) !important; display:flex; align-items:center; }
+
+/* Logo compacto */
+#logo{ max-height:48px !important; }
+</style>
+
+
+<style id="no-underline-fix">
+/* Sin subrayado en botones y link de email del top */
+a.et_pb_button, a.et_pb_button:visited, a.et_pb_button:hover,
+#top-header #et-info a, #top-header #et-info a:hover { text-decoration: none !important; }
+</style>
+
+
+<style id="menu-gap-and-search-align">
+:root{ --menu-h: 60px; }
+#top-menu{ display:flex; gap:20px !important; margin:0 !important; padding:0 !important; }
+#top-menu > li{ margin:0 !important; padding:0 !important; }
+#top-menu > li > a{
+  display:flex !important;
+  align-items:center !important;
+  line-height:var(--menu-h) !important;
+  padding:0 14px !important;
+}
+#et_top_search{ height:var(--menu-h) !important; display:flex !important; align-items:center !important; }
+#et_search_icon{ display:inline-flex !important; align-items:center !important; height:var(--menu-h) !important; }
+#et_search_icon:before{ line-height:var(--menu-h) !important; vertical-align:middle !important; display:inline-block !important; }
+</style>
+
+
+
+<style id="tiktok-icon-fix">
+.et_pb_social_media_follow .et-social-tiktok a.icon:before {
+  font-family: "Font Awesome 6 Brands" !important;
+  content: "\e07b" !important; /* Unicode TikTok FA6 */
+  font-weight: 400 !important;
+  color: #ea6f29 !important;
+}
+</style>
+
+
+<style id="tiktok-svg-fix-final">
+.et_pb_social_media_follow .et-social-tiktok a.icon:before{content:none!important;}
+.et_pb_social_media_follow .et-social-tiktok a.icon{color:#ea6f29!important;border-color:#ea6f29!important;}
+.et_pb_social_media_follow .et-social-tiktok a.icon svg{width:26px;height:26px;display:block;fill:currentColor;}
+</style>
+
+
+<style id="fb-ig-icon-map">
+.et_pb_social_media_follow .et-social-facebook a.icon:before{font-family:"ETmodules"!important;content:"\e093"!important;color:#ea6f29!important;}
+.et_pb_social_media_follow .et-social-instagram a.icon:before{font-family:"ETmodules"!important;content:"\e09a"!important;color:#ea6f29!important;}
+.et_pb_social_media_follow_0 a.icon.et_pb_with_border{border-color:#ea6f29!important;}
+</style>
+
+
+
+
+
+
+
+
+<style id="tiktok-align-fix-final">
+/* Igual altura visual con FB/IG */
+.et_pb_social_media_follow .et-social-tiktok a.icon svg{
+  width:18px; height:18px;
+  display:inline-block;
+  vertical-align:middle;
+  transform: translateY(5px); /* baja un poco el SVG */
+}
+</style>
+
+</head>
+<body class="et_fixed_nav et_show_nav et_secondary_nav_enabled et_header_style_left et_pb_gutters3 et_no_sidebar et_divi_theme">
+  <div id="page-container">
+    <div id="et-boc" class="et-boc">
+
+      <!-- Top bar -->
+      <div id="top-header">
+        <div class="container clearfix">
+          <div id="et-info">
+            <span id="et-info-phone">+57 3002148496</span>
+            <a href="mailto:Terapiasdebienestarcecimor@gmail.com"><span id="et-info-email">Terapiasdebienestarcecimor@gmail.com</span></a>
+          </div>
+          <div id="et-secondary-menu"></div>
+        </div>
+      </div>
+
+      <!-- Header / Menu -->
+      <header id="main-header" data-height-onload="66">
+        <div class="container clearfix et_menu_container">
+          <div class="logo_container">
+            <span class="logo_helper"></span>
+            <a href="index.html">
+              <img src="images/logo-removebg-preview-1.png" width="234" height="276" alt="CECI MOR" id="logo" data-height-percentage="100" />
+            </a>
+          </div>
+          <div id="et-top-navigation" data-height="66" data-fixed-height="40">
+            <nav id="top-menu-nav">
+              <ul id="top-menu" class="nav">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="sobre-mi.html">Sobre mi</a></li>
+                <li class="current_page_item"><a href="servicios.html" aria-current="page">Servicios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="testimonios.html">Testimonios</a></li>
+                <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+              </ul>
+            </nav>
+<div id="et_top_search"><span id="et_search_icon"></span></div>
+            <div id="et_mobile_nav_menu">
+              <div class="mobile_nav closed">
+                <span class="select_page">Select Page</span>
+                <span class="mobile_menu_bar mobile_menu_bar_toggle"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+<div class="et_search_outer">
+  <div class="container et_search_form_container">
+    <form class="et-search-form" role="search" method="get" action="index.html/">
+      <input type="search" class="et-search-field" placeholder="Search …" name="s" title="Search for:" value="">
+    </form>
+    <span class="et_close_search_field"></span>
+  </div>
+</div>
+</header>
+
+
+      <div id="et-main-area">
+        <div id="main-content">
+
+          <article class="page type-page">
+            <div class="entry-content">
+              <div class="et-l et-l--post">
+                <div class="et_builder_inner_content et_pb_gutters3">
+
+                  <!-- Hero -->
+                  <div class="et_pb_section et_pb_section_0 et_pb_with_background et_section_regular" style="background-color:#f5ede7;">
+                    <div class="et_pb_row et_pb_row_0">
+                      <div class="et_pb_column et_pb_column_4_4 et_pb_column_0 et_pb_css_mix_blend_mode_passthrough et-last-child">
+
+                        <div class="et_pb_module et_pb_image et_pb_image_0" style="text-align:center;">
+                          <span class="et_pb_image_wrap ">
+                            <img width="24" height="24" src="images/health-clinic-1-1.png" alt="icono" />
+                          </span>
+                        </div>
+
+                        <div class="et_pb_module et_pb_text et_pb_text_0 et_pb_text_align_center et_pb_bg_layout_light" style="margin-bottom:10px;">
+                          <div class="et_pb_text_inner"><h1 style="font-family: 'Prata', Georgia, 'Times New Roman', serif; font-size:72px; line-height:1.2;">Nuestros Servicios</h1></div>
+                        </div>
+
+                        <div class="et_pb_module et_pb_image et_pb_image_1" style="text-align:center;">
+                          <span class="et_pb_image_wrap has-box-shadow-overlay">
+                            <div class="box-shadow-overlay"></div>
+                            <!-- Usa tu imagen local equivalente si cambiaste el nombre -->
+                            <img width="694" height="770" src="images/image.png" alt="Servicios">
+                          </span>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <!-- Tres columnas -->
+                    <div class="et_pb_row et_pb_row_1 et_pb_equal_columns">
+                      <!-- Col 1 -->
+                      <div class="et_pb_with_border et_pb_column_1_3 et_pb_column et_pb_column_1 et_pb_css_mix_blend_mode_passthrough" style="background-color:#f5ede7;border-radius:10px;border:1px solid #ca5500;padding:30px;">
+                        <div class="et_pb_module et_pb_image et_pb_image_2">
+                          <span class="et_pb_image_wrap "><img width="32" height="32" src="images/Health-Clinic-icon-1-1.png" alt="icon 1" /></span>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_1 et_pb_text_align_left et_pb_bg_layout_light" style="margin-bottom:10px;">
+                          <div class="et_pb_text_inner"><h4 style="font-family:'Prata',serif;font-size:22px;line-height:1.4;"><strong>Bienestar emocional</strong></h4></div>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_2 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner">
+                            <ul>
+                              <li><p>Terapias de Integración emocional</p></li>
+                              <li><p>Psicoterapia de sanación</p></li>
+                              <li><p>Depresión, ansiedad, miedos, fobias, autoconocimiento, autoestima</p></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Col 2 -->
+                      <div class="et_pb_with_border et_pb_column_1_3 et_pb_column et_pb_column_2 et_pb_css_mix_blend_mode_passthrough" style="background-color:#f5ede7;border-radius:10px;border:1px solid #ca5500;padding:30px;">
+                        <div class="et_pb_module et_pb_image et_pb_image_3">
+                          <span class="et_pb_image_wrap "><img width="32" height="32" src="images/Health-Clinic-icon-3-1.png" alt="icon 3" /></span>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_3 et_pb_text_align_left et_pb_bg_layout_light" style="margin-bottom:10px;">
+                          <div class="et_pb_text_inner"><h4 style="font-family:'Prata',serif;font-size:22px;line-height:1.4;"><strong>Reiki y Terapias Energéticas</strong></h4></div>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_4 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner">
+                            <ul>
+                              <li><p>Reiki (presencial/a distancia)</p></li>
+                              <li><p>Armonización de chakras</p></li>
+                              <li><p>Limpiezas energéticas</p></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Col 3 -->
+                      <div class="et_pb_with_border et_pb_column_1_3 et_pb_column et_pb_column_3 et_pb_css_mix_blend_mode_passthrough et-last-child" style="background-color:#f5ede7;border-radius:10px;border:1px solid #ca5500;padding:30px;">
+                        <div class="et_pb_module et_pb_image et_pb_image_4">
+                          <span class="et_pb_image_wrap "><img width="32" height="32" src="images/Health-Clinic-icon-4-1.png" alt="icon 4" /></span>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_5 et_pb_text_align_left et_pb_bg_layout_light" style="margin-bottom:10px;">
+                          <div class="et_pb_text_inner"><h4 style="font-family:'Prata',serif;font-size:22px;line-height:1.4;"><strong>Masajes Terapéuticos</strong></h4></div>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_6 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner">
+                            <ul>
+                              <li><p>Masaje relajante</p></li>
+                              <li><p>Masaje descontracturante</p></li>
+                              <li><p>Reflexología podal</p></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Dos columnas -->
+                    <div class="et_pb_row et_pb_row_2 et_pb_equal_columns">
+                      <!-- Col izquierda -->
+                      <div class="et_pb_with_border et_pb_column_1_2 et_pb_column et_pb_column_4 et_pb_css_mix_blend_mode_passthrough" style="background-color:#f5ede7;border-radius:10px;border:1px solid #ca5500;padding:30px;">
+                        <div class="et_pb_module et_pb_image et_pb_image_5">
+                          <span class="et_pb_image_wrap "><img width="32" height="32" src="images/Health-Clinic-icon-2-1.png" alt="icon 2" /></span>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_7 et_pb_text_align_left et_pb_bg_layout_light" style="margin-bottom:10px;">
+                          <div class="et_pb_text_inner"><h4 style="font-family:'Prata',serif;font-size:22px;line-height:1.4;"><strong>Estética y Cuidado Corporal</strong></h4></div>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_8 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner">
+                            <ul>
+                              <li><p>Moldeamiento corporal</p></li>
+                              <li><p>Drenaje linfático</p></li>
+                              <li><p>Limpieza facial</p></li>
+                              <li><p>Tratamientos: Auriculoterapia, acné, celulitis</p></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Col derecha -->
+                      <div class="et_pb_with_border et_pb_column_1_2 et_pb_column et_pb_column_5 et_pb_css_mix_blend_mode_passthrough et-last-child" style="background-color:#f5ede7;border-radius:10px;border:1px solid #ca5500;padding:30px;">
+                        <div class="et_pb_module et_pb_image et_pb_image_6">
+                          <span class="et_pb_image_wrap "><img width="32" height="32" src="images/Health-Clinic-icon-5-1.png" alt="icon 5" /></span>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_9 et_pb_text_align_left et_pb_bg_layout_light" style="margin-bottom:10px;">
+                          <div class="et_pb_text_inner"><h4 style="font-family:'Prata',serif;font-size:22px;line-height:1.4;"><strong>Combos y Promociones</strong></h4></div>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_10 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner">
+                            <ul>
+                              <li><p>Paquetes: terapia emocional + relajación + Reiki (20% DCTO)</p></li>
+                              <li><p>Bonos de regalo por referido efectivo</p></li>
+                              <li><p>Primera sesión gratis al tomar una sesión o tratamiento</p></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Franja CTA -->
+                  <div class="et_pb_section et_pb_section_1 et_pb_with_background et_section_regular" style="background:#b1a066;">
+                    <div class="et_pb_row et_pb_row_3">
+                      <div class="et_pb_column et_pb_column_4_4 et_pb_column_6 et_pb_css_mix_blend_mode_passthrough et-last-child" style="text-align:center;">
+                        <div class="et_pb_module et_pb_icon et_pb_icon_0" style="font-size:48px;color:#fff;margin-bottom:10px;">❤</div>
+                        <div class="et_pb_module et_pb_text et_pb_text_11 et_pb_text_align_center et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner"><h2 style="color:#ffffff;">Renueva tu energía, encuentra tu equilibrio.</h2></div>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_12 et_pb_text_align_center et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner"><p>Terapias de Bienestar Ceci Mor se enfoca en la transformación personal a través de un enfoque integral: emocional, energético y físico, combinando la terapia emocional, la estética consciente, el Reiki y el crecimiento personal</p></div>
+                        </div>
+                        <div class="et_pb_button_module_wrapper et_pb_button_0_wrapper et_pb_button_alignment_center et_pb_module">
+                          <a class="et_pb_button et_pb_button_0 et_pb_bg_layout_light" href="https://api.whatsapp.com/send/?phone=573002148496&type=phone_number" target="_blank">Reserva Ahora</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Listados finales 3 col -->
+                  <div class="et_pb_section et_pb_section_2 et_section_regular">
+                    <div class="et_pb_row et_pb_row_4">
+                      <div class="et_pb_column et_pb_column_1_3 et_pb_column_7 et_pb_css_mix_blend_mode_passthrough">
+                        <div class="et_pb_module et_pb_text et_pb_text_13 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner"><h4>Belleza Física (Corporal &amp; Facial)</h4></div>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_14 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner">
+                            <ul>
+                              <li><p>Exfoliación corporal revitalizante</p></li>
+                              <li><p>Hidratación profunda intensiva</p></li>
+                              <li><p>Moldeado corporal personalizado</p></li>
+                              <li><p>Limpieza facial profunda</p></li>
+                              <li><p>Masaje antiestrés / piedras calientes</p></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="et_pb_column et_pb_column_1_3 et_pb_column_8 et_pb_css_mix_blend_mode_passthrough">
+                        <div class="et_pb_module et_pb_text et_pb_text_15 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner"><h4>Energía &amp; Equilibrio</h4></div>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_16 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner">
+                            <ul>
+                              <li><p>Reiki de armonización integral</p></li>
+                              <li><p>Reflexología podal terapéutica</p></li>
+                              <li><p>Alineación y balance de chakras</p></li>
+                              <li><p>Limpieza y protección energética</p></li>
+                              <li><p>Meditación guiada de sanación</p></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="et_pb_column et_pb_column_1_3 et_pb_column_9 et_pb_css_mix_blend_mode_passthrough et-last-child">
+                        <div class="et_pb_module et_pb_text et_pb_text_17 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner"><h4>Emoción &amp; Bienestar</h4></div>
+                        </div>
+                        <div class="et_pb_module et_pb_text et_pb_text_18 et_pb_text_align_left et_pb_bg_layout_light">
+                          <div class="et_pb_text_inner">
+                            <ul>
+                              <li><p>Terapia emocional personalizada</p></li>
+                              <li><p>Integración emocional (ansiedad/duelo)</p></li>
+                              <li><p>Sanación emocional con Reiki</p></li>
+                              <li><p>Seguimiento y hábitos post-sesión</p></li>
+                              <li><p>Paquetes: Renueva / Belleza / Paz Interior</p></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="et-l et-l--footer">
+          <div class="et_builder_inner_content et_pb_gutters3">
+            <div class="et_pb_section et_pb_section_0_tb_footer et_pb_with_background et_section_regular">
+              <div class="et_pb_row et_pb_row_0_tb_footer">
+                <div class="et_pb_column et_pb_column_4_4 et_pb_column_0_tb_footer et_pb_css_mix_blend_mode_passthrough et-last-child" style="text-align:center;">
+                  <div class="et_pb_button_module_wrapper et_pb_button_0_tb_footer_wrapper et_pb_button_alignment_center et_pb_module">
+                    <a class="et_pb_button et_pb_button_0_tb_footer et_pb_bg_layout_light" href="https://api.whatsapp.com/send/?phone=573002148496&type=phone_number" target="_blank">Contáctanos</a>
+                  </div>
+                  <div class="et_pb_module et_pb_text et_pb_text_0_tb_footer et_pb_text_align_left et_pb_bg_layout_light">
+                    <div class="et_pb_text_inner"><p style="text-align: center;">Terapiasdebienestarcecimor@gmail.com</p></div>
+                  </div>
+                  <ul class="et_pb_module et_pb_social_media_follow et_pb_social_media_follow_0 clearfix et_pb_text_align_center et_pb_bg_layout_light"><li class="et_pb_social_media_follow_network_0 et_pb_social_icon et_pb_social_network_link et-social-facebook"><a class="icon et_pb_with_border" href="https://www.facebook.com/TerapiasdeBienestarCeciMor/" target="_blank" title="Follow on Facebook"><span aria-hidden="true" class="et_pb_social_media_follow_network_name">Follow</span></a></li><li class="et_pb_social_media_follow_network_1 et_pb_social_icon et_pb_social_network_link et-social-instagram"><a class="icon et_pb_with_border" href="https://www.instagram.com/terapiasdebienestarcecimor/" target="_blank" title="Follow on Instagram"><span aria-hidden="true" class="et_pb_social_media_follow_network_name">Follow</span></a></li>
+<li class="et_pb_social_media_follow_network_2 et_pb_social_icon et_pb_social_network_link et-social-tiktok">
+  <a class="icon et_pb_with_border" href="https://www.tiktok.com/@terapeutacecimor" target="_blank" title="Follow on TikTok" rel="noopener">
+    <svg viewBox="0 0 448 512" aria-hidden="true" focusable="false">
+      <path d="M448 209.9c-26.2 0-52-8.2-73.4-23.5v122.2c0 86.1-69.8 156-156 156S63 394.7 63 308.6 132.8 152.6 218.9 152.6c7.1 0 14.1.5 21 1.6v84.6a72 72 0 1 0 50.7 68.8V0h84.6c3.4 48.4 33 90.7 73.8 112.6V209.9z"/>
+    </svg>
+  </a>
+</li>
+</ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="et_pb_section et_pb_section_1_tb_footer et_pb_with_background et_section_regular" style="background:#b1a066;">
+              <div class="et_pb_row et_pb_row_1_tb_footer">
+                <div class="et_pb_column et_pb_column_4_4 et_pb_column_1_tb_footer et_pb_css_mix_blend_mode_passthrough et-last-child" style="text-align:center;">
+                  <div class="et_pb_module et_pb_text et_pb_text_1_tb_footer et_pb_text_align_center et_pb_bg_layout_light">
+                    <div class="et_pb_text_inner"><h2 style="color:#ffffff;"><strong>Relaja tu cuerpo, equilibra tu mente, renueva tu energía.</strong></h2></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </footer>
+
+      </div>
+
+    </div>
+  </div>
+
+  
+  <!-- Core JS (renamed unique) -->
+  <script src="js/jquery-37-34.js"></script>
+  <script src="js/jquery-migrate-34.js"></script>
+  <script src="js/scripts-4274-34.js"></script>
+
+  <!-- Site JS like index.html -->
+  <script src="js/et_pb_custom_shim.js"></script>
+  <script src="js/wp2local-map.js"></script>
+  <script src="js/inline-1.js"></script>
+  <script src="js/inline-2.js"></script>
+  <script src="js/inline-4.js"></script>
+  <script src="js/inline-5.js"></script>
+  <script src="js/inline-6.js"></script>
+  <script src="js/inline-7.js"></script>
+  <script src="js/inline-8.js"></script>
+  <script src="js/inline-9.js"></script>
+  <script src="js/inline-10.js"></script>
+  <script src="js/lazyfix.js"></script>
+
+</body>
+</html>
