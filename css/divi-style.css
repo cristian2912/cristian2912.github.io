@@ -1,0 +1,31 @@
+/* divi-style.css – estilos principales de Divi */
+
+/* ETmodules local */
+@font-face {
+  font-family: "ETmodules";
+  src: url("../fonts/modules.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Font Awesome Brands local */
+@font-face {
+  font-family: "Font Awesome 5 Brands";
+  src: url("../fonts/fa-brands-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* resto de las reglas de Divi */
+.et_pb_text {
+  line-height: 1.7em;
+  margin-bottom: 20px;
+}
+
+.et_pb_button {
+  background-color: #2ea3f2;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+}

@@ -1,0 +1,15 @@
+/* Font Awesome Brands (solo WOFF2 disponible) */
+@font-face {
+  font-family: 'Font Awesome 5 Brands';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/fa-brands-400.woff2') format('woff2');
+}
+
+/* Divi Modules Icons (solo WOFF disponible) */
+@font-face {
+  font-family: 'ETModules';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/modules.woff') format('woff');
+}
