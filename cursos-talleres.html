@@ -95,6 +95,21 @@ ul.et_pb_social_media_follow{list-style-type:none!important;margin:0 0 22px;padd
 <link rel="stylesheet" href="css/mediaelementplayer-legacy-4.2.17.min.css" />
 <link rel="stylesheet" href="css/overrides.css" />
 <link rel="stylesheet" href="css/wp-mediaelement-6.8.3.min.css" />
+
+<style id="fix-linea-blanca-v2">
+/* Quitar línea blanca entre secciones Divi sin romper layout */
+.et_pb_section,
+.et_pb_fullwidth_section{margin-bottom:0 !important;border:0 !important}
+/* Corrige subpixel gap en navegadores */
+.et_pb_section + .et_pb_section,
+.et_pb_fullwidth_section + .et_pb_fullwidth_section{margin-top:-1px !important}
+/* Anula separadores que algunos layouts dibujan con :before */
+.et_pb_section:before,
+.et_pb_fullwidth_section:before{background:transparent !important;height:0 !important;border:0 !important;content:none !important}
+/* Evita bordes en filas que podrían verse como línea */
+.et_pb_row{border:0 !important}
+</style>
+
 </head>
 <body class="wp-singular page-template-default page page-id-99 wp-theme-Divi et-tb-has-template et-tb-has-footer et_pb_button_helper_class et_fullwidth_secondary_nav et_fixed_nav et_show_nav et_secondary_nav_enabled et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_flip et_header_style_left et_cover_background et_pb_gutter windows et_pb_gutters3 et_pb_pagebuilder_layout et_no_sidebar et_divi_theme et-db">
 	<div id="page-container">
